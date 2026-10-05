@@ -1,0 +1,13 @@
+<svg width="232" height="48" viewBox="0 0 232 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- For dark backgrounds. Wordmark is live text: requires the Outfit font. -->
+  <rect width="48" height="48" rx="12" fill="#981D87"/>
+  <g stroke="#FFFFFF" stroke-width="5" stroke-linecap="round">
+    <line x1="13" y1="35" x2="13" y2="28"/>
+    <line x1="21.5" y1="35" x2="21.5" y2="22"/>
+    <line x1="30" y1="35" x2="30" y2="16"/>
+  </g>
+  <circle cx="37.5" cy="10.5" r="3.5" fill="#33CBB0"/>
+  <text x="60" y="34" font-family="Outfit, Inter, sans-serif" font-size="28" font-weight="600" letter-spacing="-0.5">
+    <tspan fill="#FFFFFF">NaijaBiz</tspan><tspan fill="#E7A6DD" dx="6">IQ</tspan>
+  </text>
+</svg>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NaijaBiz IQ Brand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --purple:#981D87; --ink:#111928; --muted:#858A8B; --line:#D1D5DB; --surface:#F7F7F8; --tint:#FFF4FF; }
+  body { margin:0; background:#fff; color:var(--ink); font-family:Inter, sans-serif; }
+  main { max-width:1000px; margin:0 auto; padding:32px 16px; }
+  h1, h2 { font-family:Outfit, sans-serif; margin:0 0 12px; }
+  h1 { font-size:32px; } h2 { font-size:18px; margin-top:36px; }
+  .row { display:flex; flex-wrap:wrap; gap:24px; align-items:center; }
+  .panel { padding:24px; border-radius:16px; border:1px solid var(--line); }
+  .dark { background:#3B1439; border:none; }
+  .sw { width:150px; } .chip { height:64px; border-radius:12px; border:1px solid rgba(0,0,0,.06); }
+  .sw b { display:block; margin-top:8px; font-size:13px; } .sw span { font-size:12px; color:var(--muted); }
+  .lockup { display:flex; align-items:center; gap:20px; }
+  .divider { width:1px; height:44px; background:var(--line); }
+  .built { font-size:12px; color:var(--muted); line-height:1.3; }
+  .num { font-family:Inter; font-feature-settings:"tnum"; font-size:32px; font-weight:600; }
+  .grad { height:80px; border-radius:16px; background:linear-gradient(137deg,#B13AAC 6%,#3B1439 90%); }
+</style>
+</head>
+<body>
+<main>
+  <h1>NaijaBiz IQ Brand Preview</h1>
+
+  <h2>NaijaBiz IQ logo</h2>
+  <div class="row">
+    <div class="panel"><img src="naijabiz-iq-logo.svg" height="48" alt="NaijaBiz IQ"></div>
+    <div class="panel dark"><img src="naijabiz-iq-logo-dark.svg" height="48" alt="NaijaBiz IQ"></div>
+    <div class="panel"><img src="naijabiz-iq-mark.svg" height="64" alt=""></div>
+    <div class="panel" style="background:var(--purple);border:none"><img src="naijabiz-iq-mark-mono.svg" height="64" alt=""></div>
+  </div>
+
+  <h2>Hackathon lockup (official Wema logo, unmodified)</h2>
+  <div class="panel lockup" style="display:inline-flex">
+    <img src="naijabiz-iq-logo.svg" height="40" alt="NaijaBiz IQ">
+    <div class="divider"></div>
+    <div class="built">Built for</div>
+    <img src="wema/wema-logo-full.svg" height="44" alt="Wema Bank">
+  </div>
+
+  <h2>Official Wema logos</h2>
+  <div class="row">
+    <div class="panel"><img src="wema/wema-mark.svg" height="64" alt="Wema mark"></div>
+    <div class="panel"><img src="wema/wema-logo-full.svg" height="64" alt="Wema Bank"></div>
+  </div>
+
+  <h2>Colors</h2>
+  <div class="row" id="swatches"></div>
+
+  <h2>Hero gradient (Wema site)</h2>
+  <div class="grad"></div>
+
+  <h2>Type</h2>
+  <div style="font-family:Outfit;font-size:28px;font-weight:600">Understand your business. Make smarter decisions.</div>
+  <p style="font-size:16px;max-width:600px">Your business is growing, but your inventory spending is rising faster than your revenue. You may have less cash available later this month.</p>
+  <div class="num">₦2,450,000</div>
+</main>
+<script>
+  const colors = [
+    ["Wema Purple", "#981D87", "Primary"],
+    ["Logo Purple", "#A83595", "Full logo fill"],
+    ["Magenta", "#AD1E9B", "Focus / outline"],
+    ["Orchid", "#B13AAC", "Gradient start"],
+    ["Plum", "#3B1439", "Dark surface"],
+    ["Aubergine", "#4F2356", "Dark overlay"],
+    ["Indigo", "#411E83", "Gradient end"],
+    ["Tint", "#FFF4FF", "Light purple bg"],
+    ["Teal", "#33CBB0", "Accent (Wema gradient)"],
+    ["Wema Red", "#E8323E", "Alert / danger"],
+    ["Ink", "#111928", "Text"],
+    ["Grey", "#858A8B", "Muted text"],
+    ["Border", "#D1D5DB", "Lines"],
+    ["Surface", "#F7F7F8", "Inputs / cards"],
+  ];
+  document.getElementById("swatches").innerHTML = colors.map(([n, h, u]) =>
+    `<div class="sw"><div class="chip" style="background:${h}"></div><b>${n} ${h}</b><span>${u}</span></div>`).join("");
+</script>
+</body>
+</html>

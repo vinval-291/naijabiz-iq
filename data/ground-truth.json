@@ -1,0 +1,990 @@
+{
+  "txn_001": {
+    "trueCategory": "RENT",
+    "descriptionLevel": 1
+  },
+  "txn_002": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 3
+  },
+  "txn_003": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_004": {
+    "trueCategory": "ELECTRICITY",
+    "descriptionLevel": 1
+  },
+  "txn_005": {
+    "trueCategory": "INTERNET",
+    "descriptionLevel": 1
+  },
+  "txn_006": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_007": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_008": {
+    "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 1
+  },
+  "txn_009": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_010": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_011": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_012": {
+    "trueCategory": "TRANSPORT",
+    "descriptionLevel": 3
+  },
+  "txn_013": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_014": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_015": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 3
+  },
+  "txn_016": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_017": {
+    "trueCategory": "CASH_WITHDRAWAL",
+    "descriptionLevel": 1
+  },
+  "txn_018": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_019": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 3
+  },
+  "txn_020": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_021": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_022": {
+    "trueCategory": "ELECTRICITY",
+    "descriptionLevel": 1
+  },
+  "txn_023": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_024": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 2
+  },
+  "txn_025": {
+    "trueCategory": "CASH_WITHDRAWAL",
+    "descriptionLevel": 1
+  },
+  "txn_026": {
+    "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 3
+  },
+  "txn_027": {
+    "trueCategory": "TRANSPORT",
+    "descriptionLevel": 2
+  },
+  "txn_028": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 4
+  },
+  "txn_029": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_030": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_031": {
+    "trueCategory": "MISC",
+    "descriptionLevel": 1
+  },
+  "txn_032": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_033": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_034": {
+    "trueCategory": "SALARIES",
+    "descriptionLevel": 1
+  },
+  "txn_035": {
+    "trueCategory": "SALARIES",
+    "descriptionLevel": 1
+  },
+  "txn_036": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_037": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_038": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_039": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_040": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_041": {
+    "trueCategory": "RENT",
+    "descriptionLevel": 1
+  },
+  "txn_042": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_043": {
+    "trueCategory": "TRANSPORT",
+    "descriptionLevel": 1
+  },
+  "txn_044": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_045": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_046": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 3
+  },
+  "txn_047": {
+    "trueCategory": "INTERNET",
+    "descriptionLevel": 1
+  },
+  "txn_048": {
+    "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 1
+  },
+  "txn_049": {
+    "trueCategory": "ELECTRICITY",
+    "descriptionLevel": 4
+  },
+  "txn_050": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_051": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_052": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_053": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_054": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_055": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_056": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_057": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 3
+  },
+  "txn_058": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_059": {
+    "trueCategory": "CASH_WITHDRAWAL",
+    "descriptionLevel": 1
+  },
+  "txn_060": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_061": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_062": {
+    "trueCategory": "ELECTRICITY",
+    "descriptionLevel": 1
+  },
+  "txn_063": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_064": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_065": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 3
+  },
+  "txn_066": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_067": {
+    "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 3
+  },
+  "txn_068": {
+    "trueCategory": "MISC",
+    "descriptionLevel": 4
+  },
+  "txn_069": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_070": {
+    "trueCategory": "TRANSPORT",
+    "descriptionLevel": 4
+  },
+  "txn_071": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_072": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 4
+  },
+  "txn_073": {
+    "trueCategory": "SALARIES",
+    "descriptionLevel": 1
+  },
+  "txn_074": {
+    "trueCategory": "CASH_WITHDRAWAL",
+    "descriptionLevel": 1
+  },
+  "txn_075": {
+    "trueCategory": "SALARIES",
+    "descriptionLevel": 1
+  },
+  "txn_076": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_077": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_078": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_079": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_080": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_081": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_082": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 1
+  },
+  "txn_083": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_084": {
+    "trueCategory": "TRANSPORT",
+    "descriptionLevel": 2
+  },
+  "txn_085": {
+    "trueCategory": "RENT",
+    "descriptionLevel": 3
+  },
+  "txn_086": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_087": {
+    "trueCategory": "ELECTRICITY",
+    "descriptionLevel": 1
+  },
+  "txn_088": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_089": {
+    "trueCategory": "INTERNET",
+    "descriptionLevel": 1
+  },
+  "txn_090": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_091": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 3
+  },
+  "txn_092": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 1
+  },
+  "txn_093": {
+    "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 1
+  },
+  "txn_094": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_095": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_096": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_097": {
+    "trueCategory": "MISC",
+    "descriptionLevel": 3
+  },
+  "txn_098": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 1
+  },
+  "txn_099": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_100": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_101": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_102": {
+    "trueCategory": "ELECTRICITY",
+    "descriptionLevel": 1
+  },
+  "txn_103": {
+    "trueCategory": "CASH_WITHDRAWAL",
+    "descriptionLevel": 1
+  },
+  "txn_104": {
+    "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 3
+  },
+  "txn_105": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_106": {
+    "trueCategory": "TRANSPORT",
+    "descriptionLevel": 1
+  },
+  "txn_107": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_108": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_109": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_110": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_111": {
+    "trueCategory": "CASH_WITHDRAWAL",
+    "descriptionLevel": 1
+  },
+  "txn_112": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_113": {
+    "trueCategory": "SALARIES",
+    "descriptionLevel": 2
+  },
+  "txn_114": {
+    "trueCategory": "SALARIES",
+    "descriptionLevel": 1
+  },
+  "txn_115": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_116": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_117": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_118": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_119": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_120": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_121": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 2
+  },
+  "txn_122": {
+    "trueCategory": "TRANSPORT",
+    "descriptionLevel": 4
+  },
+  "txn_123": {
+    "trueCategory": "RENT",
+    "descriptionLevel": 1
+  },
+  "txn_124": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_125": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_126": {
+    "trueCategory": "INTERNET",
+    "descriptionLevel": 1
+  },
+  "txn_127": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_128": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_129": {
+    "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 1
+  },
+  "txn_130": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_131": {
+    "trueCategory": "CASH_WITHDRAWAL",
+    "descriptionLevel": 1
+  },
+  "txn_132": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 4
+  },
+  "txn_133": {
+    "trueCategory": "ELECTRICITY",
+    "descriptionLevel": 1
+  },
+  "txn_134": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_135": {
+    "trueCategory": "TRANSPORT",
+    "descriptionLevel": 4
+  },
+  "txn_136": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_137": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 3
+  },
+  "txn_138": {
+    "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 1
+  },
+  "txn_139": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_140": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_141": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_142": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_143": {
+    "trueCategory": "TRANSPORT",
+    "descriptionLevel": 3
+  },
+  "txn_144": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 4
+  },
+  "txn_145": {
+    "trueCategory": "ELECTRICITY",
+    "descriptionLevel": 1
+  },
+  "txn_146": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 3
+  },
+  "txn_147": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_148": {
+    "trueCategory": "MISC",
+    "descriptionLevel": 1
+  },
+  "txn_149": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 2
+  },
+  "txn_150": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 3
+  },
+  "txn_151": {
+    "trueCategory": "CASH_WITHDRAWAL",
+    "descriptionLevel": 1
+  },
+  "txn_152": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_153": {
+    "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 1
+  },
+  "txn_154": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_155": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_156": {
+    "trueCategory": "SALARIES",
+    "descriptionLevel": 1
+  },
+  "txn_157": {
+    "trueCategory": "SALARIES",
+    "descriptionLevel": 1
+  },
+  "txn_158": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 2
+  },
+  "txn_159": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_160": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_161": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_162": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_163": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_164": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 2
+  },
+  "txn_165": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_166": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 4
+  },
+  "txn_167": {
+    "trueCategory": "RENT",
+    "descriptionLevel": 1
+  },
+  "txn_168": {
+    "trueCategory": "TRANSPORT",
+    "descriptionLevel": 1
+  },
+  "txn_169": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_170": {
+    "trueCategory": "INTERNET",
+    "descriptionLevel": 1
+  },
+  "txn_171": {
+    "trueCategory": "ELECTRICITY",
+    "descriptionLevel": 1
+  },
+  "txn_172": {
+    "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 3
+  },
+  "txn_173": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_174": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_175": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 4
+  },
+  "txn_176": {
+    "trueCategory": "CASH_WITHDRAWAL",
+    "descriptionLevel": 1
+  },
+  "txn_177": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 3
+  },
+  "txn_178": {
+    "trueCategory": "CASH_WITHDRAWAL",
+    "descriptionLevel": 1
+  },
+  "txn_179": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_180": {
+    "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 1
+  },
+  "txn_181": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_182": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 3
+  },
+  "txn_183": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 2
+  },
+  "txn_184": {
+    "trueCategory": "ELECTRICITY",
+    "descriptionLevel": 4
+  },
+  "txn_185": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 1
+  },
+  "txn_186": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_187": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_188": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_189": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_190": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_191": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 1
+  },
+  "txn_192": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 1
+  },
+  "txn_193": {
+    "trueCategory": "MISC",
+    "descriptionLevel": 1
+  },
+  "txn_194": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_195": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_196": {
+    "trueCategory": "SALARIES",
+    "descriptionLevel": 2
+  },
+  "txn_197": {
+    "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 1
+  },
+  "txn_198": {
+    "trueCategory": "SALARIES",
+    "descriptionLevel": 1
+  },
+  "txn_199": {
+    "trueCategory": "TRANSPORT",
+    "descriptionLevel": 1
+  },
+  "txn_200": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_201": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_202": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 1
+  },
+  "txn_203": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_204": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_205": {
+    "trueCategory": "TRANSPORT",
+    "descriptionLevel": 3
+  },
+  "txn_206": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_207": {
+    "trueCategory": "RENT",
+    "descriptionLevel": 1
+  },
+  "txn_208": {
+    "trueCategory": "CASH_WITHDRAWAL",
+    "descriptionLevel": 1
+  },
+  "txn_209": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_210": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 2
+  },
+  "txn_211": {
+    "trueCategory": "INTERNET",
+    "descriptionLevel": 1
+  },
+  "txn_212": {
+    "trueCategory": "ELECTRICITY",
+    "descriptionLevel": 1
+  },
+  "txn_213": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_214": {
+    "trueCategory": "TRANSPORT",
+    "descriptionLevel": 3
+  },
+  "txn_215": {
+    "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 3
+  },
+  "txn_216": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_217": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_218": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_219": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 1
+  },
+  "txn_220": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 4
+  },
+  "txn_221": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_222": {
+    "trueCategory": "TRANSPORT",
+    "descriptionLevel": 3
+  },
+  "txn_223": {
+    "trueCategory": "MISC",
+    "descriptionLevel": 1
+  },
+  "txn_224": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 4
+  },
+  "txn_225": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 1
+  },
+  "txn_226": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_227": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_228": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_229": {
+    "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 1
+  },
+  "txn_230": {
+    "trueCategory": "ELECTRICITY",
+    "descriptionLevel": 1
+  },
+  "txn_231": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 4
+  },
+  "txn_232": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 2
+  },
+  "txn_233": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_234": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_235": {
+    "trueCategory": "TRANSPORT",
+    "descriptionLevel": 1
+  },
+  "txn_236": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_237": {
+    "trueCategory": "SALARIES",
+    "descriptionLevel": 1
+  },
+  "txn_238": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
+  },
+  "txn_239": {
+    "trueCategory": "SALARIES",
+    "descriptionLevel": 2
+  },
+  "txn_240": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 2
+  },
+  "txn_241": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
+  },
+  "txn_242": {
+    "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 1
+  },
+  "txn_243": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 4
+  },
+  "txn_244": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_245": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_246": {
+    "trueCategory": "BANK_CHARGES",
+    "descriptionLevel": 1
+  },
+  "txn_247": {
+    "trueCategory": "CASH_WITHDRAWAL",
+    "descriptionLevel": 1
+  }
+}
