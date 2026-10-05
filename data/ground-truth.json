@@ -40,12 +40,12 @@
     "descriptionLevel": 2
   },
   "txn_011": {
-    "trueCategory": "INVENTORY",
-    "descriptionLevel": 2
-  },
-  "txn_012": {
     "trueCategory": "TRANSPORT",
     "descriptionLevel": 3
+  },
+  "txn_012": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
   },
   "txn_013": {
     "trueCategory": "SALES",
@@ -53,27 +53,27 @@
   },
   "txn_014": {
     "trueCategory": "SALES",
-    "descriptionLevel": 1
+    "descriptionLevel": 3
   },
   "txn_015": {
     "trueCategory": "SALES",
-    "descriptionLevel": 3
-  },
-  "txn_016": {
-    "trueCategory": "SALES",
     "descriptionLevel": 1
   },
-  "txn_017": {
+  "txn_016": {
     "trueCategory": "CASH_WITHDRAWAL",
     "descriptionLevel": 1
   },
-  "txn_018": {
+  "txn_017": {
     "trueCategory": "INVENTORY",
     "descriptionLevel": 2
   },
-  "txn_019": {
+  "txn_018": {
     "trueCategory": "INVENTORY",
     "descriptionLevel": 3
+  },
+  "txn_019": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
   },
   "txn_020": {
     "trueCategory": "SALES",
@@ -208,36 +208,36 @@
     "descriptionLevel": 2
   },
   "txn_053": {
-    "trueCategory": "INVENTORY",
-    "descriptionLevel": 2
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
   },
   "txn_054": {
-    "trueCategory": "SALES",
-    "descriptionLevel": 1
-  },
-  "txn_055": {
     "trueCategory": "INVENTORY",
     "descriptionLevel": 2
   },
-  "txn_056": {
+  "txn_055": {
     "trueCategory": "SALES",
     "descriptionLevel": 1
   },
-  "txn_057": {
+  "txn_056": {
     "trueCategory": "INVENTORY",
     "descriptionLevel": 3
   },
-  "txn_058": {
+  "txn_057": {
     "trueCategory": "SALES",
     "descriptionLevel": 1
   },
-  "txn_059": {
+  "txn_058": {
     "trueCategory": "CASH_WITHDRAWAL",
     "descriptionLevel": 1
   },
-  "txn_060": {
+  "txn_059": {
     "trueCategory": "SALES",
     "descriptionLevel": 1
+  },
+  "txn_060": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
   },
   "txn_061": {
     "trueCategory": "INVENTORY",
@@ -364,51 +364,51 @@
     "descriptionLevel": 3
   },
   "txn_092": {
-    "trueCategory": "INVENTORY",
-    "descriptionLevel": 1
-  },
-  "txn_093": {
     "trueCategory": "GENERATOR_FUEL",
     "descriptionLevel": 1
   },
-  "txn_094": {
+  "txn_093": {
     "trueCategory": "INVENTORY",
     "descriptionLevel": 2
+  },
+  "txn_094": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
   },
   "txn_095": {
     "trueCategory": "SALES",
     "descriptionLevel": 1
   },
   "txn_096": {
-    "trueCategory": "SALES",
-    "descriptionLevel": 1
-  },
-  "txn_097": {
     "trueCategory": "MISC",
     "descriptionLevel": 3
   },
-  "txn_098": {
+  "txn_097": {
     "trueCategory": "INVENTORY",
+    "descriptionLevel": 1
+  },
+  "txn_098": {
+    "trueCategory": "SALES",
     "descriptionLevel": 1
   },
   "txn_099": {
-    "trueCategory": "SALES",
-    "descriptionLevel": 1
-  },
-  "txn_100": {
     "trueCategory": "INVENTORY",
     "descriptionLevel": 2
   },
-  "txn_101": {
+  "txn_100": {
     "trueCategory": "SALES",
     "descriptionLevel": 1
   },
-  "txn_102": {
+  "txn_101": {
     "trueCategory": "ELECTRICITY",
     "descriptionLevel": 1
   },
-  "txn_103": {
+  "txn_102": {
     "trueCategory": "CASH_WITHDRAWAL",
+    "descriptionLevel": 1
+  },
+  "txn_103": {
+    "trueCategory": "INVENTORY",
     "descriptionLevel": 1
   },
   "txn_104": {
@@ -524,31 +524,31 @@
     "descriptionLevel": 1
   },
   "txn_132": {
-    "trueCategory": "INVENTORY",
-    "descriptionLevel": 4
-  },
-  "txn_133": {
     "trueCategory": "ELECTRICITY",
     "descriptionLevel": 1
   },
-  "txn_134": {
+  "txn_133": {
     "trueCategory": "SALES",
     "descriptionLevel": 1
   },
-  "txn_135": {
+  "txn_134": {
     "trueCategory": "TRANSPORT",
     "descriptionLevel": 4
   },
-  "txn_136": {
+  "txn_135": {
     "trueCategory": "SALES",
     "descriptionLevel": 1
   },
-  "txn_137": {
+  "txn_136": {
     "trueCategory": "INVENTORY",
     "descriptionLevel": 3
   },
-  "txn_138": {
+  "txn_137": {
     "trueCategory": "GENERATOR_FUEL",
+    "descriptionLevel": 1
+  },
+  "txn_138": {
+    "trueCategory": "SALES",
     "descriptionLevel": 1
   },
   "txn_139": {
@@ -560,8 +560,8 @@
     "descriptionLevel": 1
   },
   "txn_141": {
-    "trueCategory": "SALES",
-    "descriptionLevel": 1
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 4
   },
   "txn_142": {
     "trueCategory": "INVENTORY",
@@ -688,64 +688,64 @@
     "descriptionLevel": 3
   },
   "txn_173": {
-    "trueCategory": "INVENTORY",
-    "descriptionLevel": 2
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
   },
   "txn_174": {
     "trueCategory": "SALES",
-    "descriptionLevel": 1
-  },
-  "txn_175": {
-    "trueCategory": "SALES",
     "descriptionLevel": 4
   },
-  "txn_176": {
+  "txn_175": {
     "trueCategory": "CASH_WITHDRAWAL",
     "descriptionLevel": 1
   },
-  "txn_177": {
+  "txn_176": {
     "trueCategory": "INVENTORY",
     "descriptionLevel": 3
   },
-  "txn_178": {
+  "txn_177": {
     "trueCategory": "CASH_WITHDRAWAL",
+    "descriptionLevel": 1
+  },
+  "txn_178": {
+    "trueCategory": "SALES",
     "descriptionLevel": 1
   },
   "txn_179": {
-    "trueCategory": "SALES",
-    "descriptionLevel": 1
-  },
-  "txn_180": {
     "trueCategory": "GENERATOR_FUEL",
     "descriptionLevel": 1
   },
-  "txn_181": {
+  "txn_180": {
     "trueCategory": "SALES",
     "descriptionLevel": 1
   },
-  "txn_182": {
+  "txn_181": {
     "trueCategory": "INVENTORY",
     "descriptionLevel": 3
   },
-  "txn_183": {
+  "txn_182": {
     "trueCategory": "SALES",
     "descriptionLevel": 2
   },
-  "txn_184": {
+  "txn_183": {
     "trueCategory": "ELECTRICITY",
     "descriptionLevel": 4
   },
-  "txn_185": {
+  "txn_184": {
     "trueCategory": "INVENTORY",
     "descriptionLevel": 1
   },
-  "txn_186": {
+  "txn_185": {
     "trueCategory": "INVENTORY",
     "descriptionLevel": 2
   },
-  "txn_187": {
+  "txn_186": {
     "trueCategory": "SALES",
     "descriptionLevel": 1
+  },
+  "txn_187": {
+    "trueCategory": "INVENTORY",
+    "descriptionLevel": 2
   },
   "txn_188": {
     "trueCategory": "SALES",
@@ -873,42 +873,42 @@
   },
   "txn_219": {
     "trueCategory": "INVENTORY",
-    "descriptionLevel": 1
-  },
-  "txn_220": {
-    "trueCategory": "INVENTORY",
     "descriptionLevel": 4
   },
-  "txn_221": {
+  "txn_220": {
     "trueCategory": "SALES",
     "descriptionLevel": 1
   },
-  "txn_222": {
+  "txn_221": {
     "trueCategory": "TRANSPORT",
     "descriptionLevel": 3
   },
-  "txn_223": {
+  "txn_222": {
     "trueCategory": "MISC",
     "descriptionLevel": 1
   },
-  "txn_224": {
+  "txn_223": {
     "trueCategory": "SALES",
     "descriptionLevel": 4
   },
-  "txn_225": {
+  "txn_224": {
     "trueCategory": "INVENTORY",
     "descriptionLevel": 1
   },
-  "txn_226": {
+  "txn_225": {
     "trueCategory": "INVENTORY",
     "descriptionLevel": 2
+  },
+  "txn_226": {
+    "trueCategory": "SALES",
+    "descriptionLevel": 1
   },
   "txn_227": {
     "trueCategory": "SALES",
     "descriptionLevel": 1
   },
   "txn_228": {
-    "trueCategory": "SALES",
+    "trueCategory": "INVENTORY",
     "descriptionLevel": 1
   },
   "txn_229": {

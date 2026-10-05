@@ -136,7 +136,7 @@ Each transaction carries a hidden `trueCategory` and `descriptionLevel` used onl
 
 Files: `src/data/transactions.json` and `src/data/account.json` are bundled with the app. `data/ground-truth.json` is for tests only and must never be imported by app code. `public/sample/aisha-mini-mart-transactions.csv` is for the upload fallback.
 
-**Recurring patterns built in:** Adebayo Provisions every Monday; Kolawole Beverages every second Friday (next on October 9); Mama Nkechi around the 8th; rent on the 1st–3rd (moved to Monday if it falls on a weekend); salaries on the 27th (moved to Friday if on a weekend); MTN data around the 5th.
+**Recurring patterns built in:** Adebayo Provisions every Monday; Kolawole Beverages every second Friday (next on October 9); Mama Nkechi around the 18th (moved from the 8th in Phase 4 to tune the forecast); rent on the 1st–3rd (moved to Monday if it falls on a weekend); salaries on the 27th (moved to Friday if on a weekend); MTN data around the 5th.
 
 ---
 
@@ -271,9 +271,22 @@ Where:
 
 **Expected demo result: ~67 / 100 — Healthy**, with *Expense management* (54) and *Cash-flow stability* (57) as the weakest components.
 
-**Score trend:** as of June 30, the same formulas give about **87 (Strong)**. Demo line: *"Aisha's Health Score fell from 87 to 68 in three months."*
+**Score trend:** as of June 30, the same formulas give **84 (Strong)**. See the Phase 4 result below.
 
 The score is never described as a credit score or a loan decision.
+
+**Phase 4 result** (`src/lib/engine/health.ts`):
+
+| Component | Sep 30 | Jun 30 |
+|---|---:|---:|
+| Cash-flow stability | 57 | 97 |
+| Revenue consistency | 85 | 86 |
+| Expense management | 54 | 64 |
+| Cash reserve | 64 | 100 |
+| Transaction consistency | 73 | 65 |
+| **Score** | **66 — Healthy** | **84 — Strong** |
+
+The June score is computed only from what was known by June 30, including classification, so fewer transactions were confidently identified then. Demo line: *"Aisha's Health Score fell from 84 to 66 in three months."*
 
 ---
 
@@ -296,7 +309,19 @@ A daily projection from `asOf` + 1 day through `asOf` + 14 days.
 
 **Expected demo result:** lowest balance about **₦415,000** (a fall of about ₦165K, or 28%), which stays above R, so risk is **Medium**. The main drivers are rent on October 1–3 and recurring supplier payments.
 
-*To verify in Phase 4:* in the generated data, the October 1–14 window holds rent, MTN data, Adebayo ×2 (October 5 and 12), Kolawole (October 9) and Mama Nkechi (around October 8). A rough estimate puts the lowest balance at ₦300K–₦420K. Once the forecast code exists, the supplier schedule will be tuned (and the dataset regenerated) so the result lands on target. The §8 affordability numbers follow from it.
+**Phase 4 result** (`src/lib/engine/forecast.ts`): with Mama Nkechi's delivery on the 8th, the forecast came out **High** (lowest ₦166K), because three supplier payments fell in the same window. Her delivery was moved to around the 18th and the dataset regenerated. Every Phase 1 check still passes and classification is unchanged.
+
+| Item | Result |
+|---|---|
+| Expected inflow (14 days) | ₦1,256,878 (≈ ₦89.8K/day of sales) |
+| Expected outflow (14 days) | ₦1,323,250 |
+| Scheduled | Oct 1 rent ₦120K · Oct 2 IBEDC ₦27K · Oct 4 MTN ₦15K · Oct 5 Adebayo ₦215K · Oct 9 Kolawole ₦319K · Oct 12 Adebayo ₦215K |
+| Lowest balance | **₦393,038 on October 12** (a drop of ₦186,962, or 32%) |
+| End balance (Oct 14) | ₦513,628 |
+| Risk | **Medium** (lowest stays above R = ₦180K, but drops more than 15%) |
+| Reason shown | "Based on your recent patterns, your cash is likely to get tighter over the next two weeks because your payment to Kolawole Beverages Dist. and your payment to Adebayo Provisions Ltd are due." |
+
+**Effect on §8:** upcoming expected expenses = ₦580,000 − ₦393,038 = **₦186,962**. Max safe = 580,000 − 186,962 − 180,000 = **₦213,038**, so the recommended range is **₦180,000 – ₦210,000**. ₦300K → buffer ₦93K → Careful; ₦100K → buffer ₦293K → Comfortable; ₦500K → Cannot. Phase 5 will confirm these figures in code.
 
 The wording is always estimative: "expected", "likely", "based on recent patterns".
 
@@ -350,6 +375,21 @@ Every recommendation stores the metric that triggered it (`supportingMetric`), s
 
 **Expected on September 30:** #2, #3, #4, #5 (generator fuel +58%, transport +50%), likely #6, and #7. #8 does not fire, because expenses grew faster than revenue.
 
+**Phase 4 result** (`src/lib/engine/recommendations.ts`):
+
+| Before any review answers | After Aisha marks one diesel purchase as fuel |
+|---|---|
+| [High] Protect your operating cash reserve | [High] Protect your operating cash reserve |
+| [High] You spent more than you earned last month (₦1.06 per ₦1) | [High] You spent more than you earned last month |
+| [Medium] Review your stock purchases (+31% vs +12%) | [Medium] Review your stock purchases |
+| [Medium] Categorize 7 unidentified transactions (₦220K) | [Medium] Generator fuel costs are rising (+58%) |
+| | [Medium] Transport costs are rising (+50%) |
+| | [Low] Categorize 2 unidentified transactions |
+
+- #5 is held back while uncategorized spending is above 3% of running costs, and #7 is raised to Medium instead (see §5).
+- #5 reports at most 2 categories.
+- #6 does not fire: the largest supplier, Adebayo, has under 40% of stock spending.
+
 ---
 
 ## 10. Financial Readiness Profile (Phase 4)
@@ -374,6 +414,14 @@ Every recommendation stores the metric that triggered it (`supportingMetric`), s
 | 0–44 | Early stage |
 
 **Expected demo result: ~77 / 100 — Developing.** Indicators ≥ 80 are listed as **strengths**, and those < 65 as **areas to improve**.
+
+**Phase 4 result** (`src/lib/engine/readiness.ts`): **75 — Developing.**
+- Activity 72, revenue stability 85, growth 85, cash-flow history 57, reserve 64, predictable expenses 89, record quality 74, recurring income 100.
+- **Strengths:** revenue stability, revenue growth, predictable expenses, recurring income.
+- **To improve:** positive cash-flow history, cash reserve.
+- **Next steps:** "Build your cash reserve to at least ₦180K (about 10 days of running costs) before taking on larger financial commitments." · "Keep stock purchases in line with sales for the next 2–3 months so more money comes in than goes out."
+
+If there's no previous period to measure growth against, the revenue-growth indicator scores a neutral 50.
 
 This is never presented as loan eligibility. Next steps are framed as "build a stronger reserve before taking on larger commitments".
 
@@ -529,22 +577,23 @@ export interface InsightFacts {
 
 The engine is correct when, with `asOf` = September 30, 2026:
 
-- [ ] 247 transactions loaded; closing balance ₦580,000 (±₦10K)
-- [ ] Revenue growth (Q3 vs. Q2) ≈ +12%; inventory growth ≈ +31%; expense growth ≈ +26%
-- [ ] September: revenue ≈ ₦2.76M, expenses ≈ ₦2.92M, net ≈ −₦160K
-- [ ] Health Score 64–72, band **Healthy**; as of June 30, ≥ 80 (**Strong**)
-- [ ] Classification accuracy ≥ 85%; 4–10 transactions flagged
-- [ ] Forecast risk **Medium**; lowest balance ≈ ₦415K (±₦40K)
+- [x] 247 transactions loaded; closing balance ₦580,000 (±₦10K)
+- [x] Revenue growth (Q3 vs. Q2) ≈ +12%; inventory growth ≈ +31%; expense growth ≈ +26%
+- [x] September: revenue ≈ ₦2.76M, expenses ≈ ₦2.92M, net ≈ −₦160K
+- [x] Health Score 64–72, band **Healthy** (66); as of June 30, ≥ 80 (**Strong**, 84)
+- [x] Classification accuracy ≥ 85% (97.6%); 4–10 transactions flagged (7)
+- [x] Forecast risk **Medium**; lowest balance ₦393K (target ₦415K ±₦40K)
 - [x] Minimum reserve ≈ ₦180K (Phase 3)
-- [ ] ₦300K → Careful, range ≈ ₦190K–₦220K; ₦100K → Comfortable; ₦500K → Cannot
-- [ ] Readiness 72–82, band **Developing**
-- [ ] Recommendations include "Protect your operating cash reserve" (High) and "Review your stock purchases" (Medium)
+- [ ] ₦300K → Careful, range ≈ ₦180K–₦210K; ₦100K → Comfortable; ₦500K → Cannot (Phase 5)
+- [x] Readiness 72–82, band **Developing** (75)
+- [x] Recommendations include "Protect your operating cash reserve" (High) and "Review your stock purchases" (Medium)
 
 ### Changes from the master plan's illustrative numbers
 
 | Master plan example | Spec | Why |
 |---|---|---|
-| Health 78 | ~67 | A business whose cash has fallen two months in a row shouldn't score close to "Strong". The drop from 87 makes a stronger demo moment. |
+| Health 78 | 66 | A business whose cash has fallen two months in a row shouldn't score close to "Strong". The drop from 84 makes a stronger demo moment. |
 | Dashboard "Net Cash Flow ₦580K" | Cash balance ₦580K; September net −₦160K | Net cash flow and cash balance are different numbers. |
-| Range ₦200K–₦230K | ₦190K–₦220K | Comes from the reserve formula, not hand-picked. |
-| Readiness 74 | ~77 | Comes from the formula; same band ("Developing"). |
+| Range ₦200K–₦230K | ₦180K–₦210K | Comes from the reserve and forecast formulas, not hand-picked. |
+| Readiness 74 | 75 | Comes from the formula; same band ("Developing"). |
+| Forecast lowest ₦415K | ₦393K | Comes from the recurring-payment schedule in the data. |

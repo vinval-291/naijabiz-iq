@@ -268,7 +268,8 @@ function buildInventory(month: string, target: number): Draft[] {
   const recurringLevels: [number, number, number, number] = [0.2, 0.65, 0.1, 0.05];
   const out: Draft[] = [];
 
-  // Weekly supplier every Monday (~40%), bi-weekly every second Friday (~30%), monthly around the 8th (~10%).
+  // Weekly supplier every Monday (~40%), bi-weekly every second Friday (~30%), monthly around the 18th (~10%).
+  // The monthly delivery date sets how tight the Oct 1–14 forecast is (SPEC §7).
   const mondays = datesInMonth(month, (d) => weekday(d) === 1);
   const fridays = datesInMonth(month, (d) => {
     const diff = (Date.parse(d) - Date.parse(BIWEEKLY_ANCHOR)) / 86_400_000;
@@ -280,7 +281,7 @@ function buildInventory(month: string, target: number): Draft[] {
   for (const date of fridays) {
     out.push(supplierPayment(date, roundTo(jitter((0.3 * target) / 2.17, 0.05), 500), SUPPLIER_BIWEEKLY, recurringLevels));
   }
-  out.push(supplierPayment(toWeekday(iso(year, monthIndex, int(7, 9))), roundTo(jitter(0.1 * target, 0.05), 500), SUPPLIER_MONTHLY, recurringLevels));
+  out.push(supplierPayment(toWeekday(iso(year, monthIndex, int(17, 19))), roundTo(jitter(0.1 * target, 0.05), 500), SUPPLIER_MONTHLY, recurringLevels));
 
   // One-off suppliers absorb the remainder so inventory hits the target exactly.
   const remainder = target - out.reduce((a, t) => a + t.amount, 0);

@@ -127,14 +127,18 @@ Decided and recorded in `SPEC.md`:
 
 ## Phase 4 — Intelligence layer
 
-- [ ] Business Health Score: 5 weighted components, each with an explanation
-- [ ] 14-day cash forecast with risk level and a plain-language reason
-- [ ] Recommendation rules sorted into High, Medium and Low priority
-- [ ] Financial Readiness score with positive indicators and areas to improve
+- [x] Business Health Score: 5 weighted components, each with an explanation ([health.ts](src/lib/engine/health.ts))
+- [x] 14-day cash forecast with risk level and a plain-language reason ([forecast.ts](src/lib/engine/forecast.ts)); dataset tuned so it lands on Medium
+- [x] Recommendation rules sorted into High, Medium, Low and Info priority ([recommendations.ts](src/lib/engine/recommendations.ts))
+- [x] Financial Readiness score with strengths, areas to improve and next steps ([readiness.ts](src/lib/engine/readiness.ts))
+- [x] `analyze()` returns everything the app needs in one call ([index.ts](src/lib/engine/index.ts))
+- [x] 66 tests passing
 
-**Biz task:** write or approve the plain-language wording for each recommendation and readiness message.
+**Biz task:** write or approve the plain-language wording for each recommendation and readiness message. Run `npm run engine:report` to see all of it, or read [SPEC.md §9–§10](SPEC.md).
 
 **Done when:** outputs match the spec (Health ~78 "Healthy", forecast risk "Medium").
+
+**Status: ✅ Done.** Health 66 Healthy (84 Strong in June) · forecast Medium, lowest ₦393K on October 12 · Readiness 75 Developing.
 
 ---
 
