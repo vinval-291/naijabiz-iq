@@ -167,6 +167,34 @@ Rule-based scoring. For each transaction, every allowed category (filtered by di
 
 The weights above are starting values. They may be tuned in Phase 2 against the dataset, and any change is recorded here.
 
+### Phase 2 result (implemented in `src/lib/engine/classify.ts`)
+
+**Tuned weights:**
+
+| Signal | Spec start | Final | Why |
+|---|---:|---:|---|
+| Description keyword | 0.60 | **0.80** | A clear narration such as "SALARY SEP 2026 - TUNDE" should be high-confidence on its own |
+| Counterparty name keyword | — | **0.50** | Business names carry meaning ("… BEVERAGES DIST.", "IBEDC") |
+| Credit → Sales (direction) | — | **0.60** | Almost all money coming into this shop is sales |
+| Counterparty history | 0.50 | **0.60** | A counterparty that was consistently one category is strong evidence |
+| User-confirmed pattern | — | **0.70** | Description + channel when there's no counterparty (e.g. a bare `POS PURCHASE`), applied only to amounts within ±30% |
+| Others | as above | unchanged | |
+
+**How it works:** pass 1 scores each transaction on its own. Counterparty profiles are then built from pass-1 results with confidence ≥ 0.80 (a category counts as "known" when it covers ≥ 60% of at least 2 transactions). Pass 2 adds history, recurrence and user confirmations. Every result carries plain-language `reasons`.
+
+**Recurrence cadence matching:** the median interval must be within ±20% (at least ±2 days) of 7, 14 or 30 days. This replaces the flat ±5 days, which couldn't tell weekly from bi-weekly.
+
+**Results** (`npm run engine:classify-report`):
+
+| Metric | Result |
+|---|---|
+| Overall accuracy | **97.6%** (241/247) |
+| Accuracy among transactions not flagged | **100%** (240/240) |
+| Flagged for review | **7**: five bare `POS PURCHASE` diesel buys, one empty narration, one vague `TRF` |
+| Confident (≥ 0.80) but wrong | **0** |
+
+**Demo moment:** confirming one bare `POS PURCHASE` as *Generator fuel* automatically recognizes the other four. The flagged count drops from 7 to 2.
+
 ---
 
 ## 5. Financial metrics (Phase 3)

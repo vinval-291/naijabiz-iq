@@ -100,12 +100,15 @@ Decided and recorded in `SPEC.md`:
 
 ## Phase 2 — Transaction intelligence
 
-- [ ] Rule-based classifier using direction, amount, recurrence, counterparty history, channel and description keywords
-- [ ] Confidence score per transaction; low-confidence transactions flagged
-- [ ] User confirmation updates counterparty history (in memory or `localStorage`)
-- [ ] Accuracy report against `true_category`
+- [x] Rule-based classifier using direction, amount, recurrence, counterparty history, channel and description keywords ([classify.ts](src/lib/engine/classify.ts), [recurrence.ts](src/lib/engine/recurrence.ts))
+- [x] Confidence score per transaction, with plain-language reasons; low-confidence transactions flagged
+- [x] User confirmation updates counterparty and pattern memory (`confirmCategory`; the UI will persist it in `localStorage`)
+- [x] Accuracy report against ground truth (`npm run engine:classify-report`)
+- [x] Tests: `npm test` (22 passing)
 
 **Done when:** accuracy > 85% and the intended ambiguous transactions are flagged.
+
+**Status: ✅ Done.** 97.6% accuracy, 7 flagged, 0 confident mistakes. Details in [SPEC.md §4](SPEC.md).
 
 ---
 

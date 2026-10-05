@@ -9,7 +9,8 @@
     "lint": "eslint",
     "test": "vitest run",
     "data:generate": "tsx scripts/generate-dataset.ts",
-    "data:validate": "tsx scripts/validate-dataset.ts"
+    "data:validate": "tsx scripts/validate-dataset.ts",
+    "engine:classify-report": "tsx scripts/classification-report.ts"
   },
   "dependencies": {
     "next": "16.3.8",
