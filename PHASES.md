@@ -114,11 +114,14 @@ Decided and recorded in `SPEC.md`:
 
 ## Phase 3 — Financial engine
 
-- [ ] Revenue, expenses, net cash flow, expense ratio, cash reserve
-- [ ] Month-on-month growth, total and per category
-- [ ] Pure functions with unit tests
+- [x] Revenue, expenses, net cash flow, expense ratio, cash balance, days of cover, minimum reserve ([metrics.ts](src/lib/engine/metrics.ts))
+- [x] Growth: 3-month headline (total and per category); month-on-month via `monthlyMetrics` + `growth()`
+- [x] Pure functions with unit tests (43 tests passing in total)
+- [x] `npm run engine:report [date]` prints the demo numbers
 
 **Done when:** engine totals exactly match the Phase 1 validation output.
+
+**Status: ✅ Done.** Totals match exactly. Minimum reserve ₦180K. One distortion to handle in Phase 4: before review, uncategorized diesel purchases inflate fuel growth (see [SPEC.md §5](SPEC.md)).
 
 ---
 
