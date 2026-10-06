@@ -12,7 +12,9 @@
     "data:validate": "tsx scripts/validate-dataset.ts",
     "engine:classify-report": "tsx scripts/classification-report.ts",
     "engine:report": "tsx scripts/engine-report.ts",
-    "smoke": "tsx scripts/smoke.ts"
+    "smoke": "tsx scripts/smoke.ts",
+    "a11y": "tsx scripts/a11y.ts",
+    "record-demo": "tsx scripts/record-demo.ts"
   },
   "dependencies": {
     "next": "16.3.8",
@@ -20,6 +22,7 @@
     "react-dom": "19.2.8"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^24.19.1",
     "@types/react": "^19",

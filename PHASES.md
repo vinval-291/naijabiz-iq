@@ -213,12 +213,40 @@ Build in this order. Stop at the end of any tier if time runs out.
 
 ## Phase 9 — Testing and hardening
 
-- [ ] Data, classification, forecast and affordability tests pass
-- [ ] Production deployment plus a second backup deployment
-- [ ] Backup screenshots and a recorded demo video (in case of Wi-Fi or laptop failure)
-- [ ] Definition of Done checklist (master plan, Phase 24)
+- [x] Data, classification, forecast and affordability tests pass (94 unit tests; `npm test`)
+- [x] Browser smoke test on desktop, 390px and 320px, failing on any horizontal overflow (`npm run smoke`)
+- [x] Accessibility scan (axe, WCAG 2.1 AA) of every screen: no serious or critical issues (`npm run a11y`)
+- [x] Loading, error ("Try again" / "Start over") and not-found screens
+- [x] Fonts self-hosted, so the app works fully offline
+- [ ] Production deployment plus a second backup deployment (**waiting on GitHub + Vercel accounts**)
+- [x] Backup screenshots and recorded demo videos: `npm run record-demo -- http://localhost:3100 desktop|mobile` → `demo-backup/` (synced by OneDrive, not in Git)
+- [x] Definition of Done checklist (below)
 
-**Biz task:** run the full demo at least 3 times and log every glitch.
+**Biz task:** run the full demo at least 3 times and log every glitch. Follow [DEMO.md](DEMO.md).
+
+### Definition of Done (master plan, Phase 24)
+
+| Item | Status |
+|---|---|
+| User can create a business profile | ✅ |
+| User can connect a simulated Wema account | ✅ consent screen labelled "Prototype" |
+| Transaction dataset loads successfully | ✅ 247 transactions (+ CSV upload) |
+| Transactions are categorized | ✅ 97.6% accuracy |
+| Low-confidence transactions are identifiable | ✅ 7 flagged, with a review question |
+| Revenue / expenses / net cash flow calculated correctly | ✅ match targets exactly (tested) |
+| Monthly trends are displayed | ✅ "Money in vs money out" chart |
+| Business Health Score works | ✅ 66 Healthy (84 in June) |
+| Insights generated from verified metrics | ✅ template-based, every number checked (no live LLM; see SPEC §11) |
+| Forecast is displayed | ✅ Medium risk, lowest ₦393K on 12 Oct |
+| Recommendations are displayed | ✅ |
+| "Can I Afford This?" works | ✅ ₦300K → careful, safer range ₦180K–₦210K |
+| Financial Readiness profile works | ✅ 75 Developing |
+| Dashboard is polished | ✅ desktop and mobile |
+| Application is deployed | ⏳ needs GitHub + Vercel |
+| Demo data is stable | ✅ deterministic; same numbers every run |
+| Demo flow has been rehearsed | ⏳ team (Day 3) |
+| Pitch is prepared | ⏳ Phase 10 |
+| Backup demo exists | ✅ videos + screenshots; backup deployment after deploy |
 
 ---
 

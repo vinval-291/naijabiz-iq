@@ -13,6 +13,8 @@
 # testing
 /coverage
 /.smoke
+# Backup demo videos/screenshots (large; the folder is synced by OneDrive)
+/demo-backup
 
 # next.js
 /.next/

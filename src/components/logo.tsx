@@ -16,7 +16,7 @@ export function LogoMark({ size = 32, className = "" }: { size?: number; classNa
 
 export function Logo({ size = 32, onDark = false }: { size?: number; onDark?: boolean }) {
   return (
-    <span className="inline-flex items-center gap-2.5" aria-label="NaijaBiz IQ">
+    <span className="inline-flex items-center gap-2.5" role="img" aria-label="NaijaBiz IQ">
       <LogoMark size={size} />
       <span className="font-display font-semibold tracking-tight" style={{ fontSize: size * 0.62 }} aria-hidden="true">
         <span className={onDark ? "text-white" : "text-ink"}>NaijaBiz</span>{" "}

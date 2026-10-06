@@ -7,7 +7,7 @@ import { useAppState } from "@/components/app-state";
 import {
   BadgeIcon, BulbIcon, CheckListIcon, HomeIcon, ListIcon, MoreIcon, ScaleIcon, TrendIcon,
 } from "@/components/icons";
-import { BuiltForWema, Logo } from "@/components/logo";
+import { BuiltForWema, Logo, LogoMark } from "@/components/logo";
 
 const NAV = [
   { href: "/dashboard", label: "Home", icon: HomeIcon, mobile: true },
@@ -30,7 +30,16 @@ export default function AppLayout({ children }: { children: ReactNode }) {
     if (hydrated && !analysis) router.replace("/connect");
   }, [hydrated, analysis, router]);
 
-  if (!analysis) return null;
+  if (!analysis) {
+    return (
+      <div className="grid flex-1 place-items-center px-4" role="status" aria-live="polite">
+        <div className="flex flex-col items-center gap-4 text-muted">
+          <LogoMark size={40} className="motion-safe:animate-pulse" />
+          <span className="text-sm">{hydrated ? "Taking you to connect your account…" : "Loading your business…"}</span>
+        </div>
+      </div>
+    );
+  }
   const flagged = analysis.flagged.length;
 
   return (
