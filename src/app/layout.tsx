@@ -1,11 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Inter, Outfit } from "next/font/google";
 import { AppStateProvider } from "@/components/app-state";
 import "./globals.css";
 
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
-const outfit = Outfit({ variable: "--font-outfit", subsets: ["latin"], weight: ["400", "600", "700"] });
-const plexMono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"], weight: ["400", "500"] });
+// Fonts are self-hosted from public/fonts and declared in globals.css (no Google Fonts at runtime).
+const PRELOAD_FONTS = ["/fonts/inter-latin-wght-normal.woff2", "/fonts/outfit-latin-wght-normal.woff2"];
 
 export const metadata: Metadata = {
   title: "NaijaBiz IQ",
@@ -18,8 +16,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-NG" className={`${inter.variable} ${outfit.variable} ${plexMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
+    <html lang="en-NG" className="h-full antialiased">
+      <head>
+        {PRELOAD_FONTS.map((href) => (
+          <link key={href} rel="preload" href={href} as="font" type="font/woff2" crossOrigin="" />
+        ))}
+      </head>
+      {/* Browser extensions (e.g. ColorZilla's cz-shortcut-listen) add attributes to <body> before React loads. */}
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <AppStateProvider>{children}</AppStateProvider>
       </body>
     </html>
