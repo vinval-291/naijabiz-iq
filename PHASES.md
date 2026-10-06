@@ -154,15 +154,19 @@ Decided and recorded in `SPEC.md`:
 
 ---
 
-## Phase 6 — AI insight layer
+## Phase 6 — Insight layer
 
-- [ ] Server route sends **only verified metrics** to the LLM
-- [ ] Prompt enforces plain language and allows no new numbers
-- [ ] Check that every number in the response exists in the input
-- [ ] Templated fallback when the API fails or the check rejects the response
-- [ ] Cache insights for the demo dataset so the demo doesn't depend on network speed
+**Decision (Oct 6):** no paid LLM API for the MVP. Cut-list item 3 was applied, and the templated insights are now the primary path.
+
+- [x] Insights built **only from verified metrics** (`InsightFacts`) ([insights.ts](src/lib/engine/insights.ts))
+- [x] Plain-language templates, with the most important insight first (that one is the dashboard's key insight)
+- [x] Number checker: every ₦ amount, % and number in an insight must match a fact (`checkNumbers`)
+- [x] Works offline and is deterministic, so no caching or network is needed
+- [ ] *(Optional, later)* plug in a free-tier LLM behind `checkNumbers`, keeping the templates as fallback
 
 **Done when:** insights never contain a number that isn't in the metrics, and the demo works offline using the fallback.
+
+**Status: ✅ Done.** 6 insights on the demo date, all verified; 87 tests passing.
 
 ---
 
@@ -218,7 +222,7 @@ Biz can start on October 6, while Dev builds:
 
 1. Supabase / database persistence
 2. CSV upload fallback (keep only the simulated Wema connection)
-3. Live LLM calls (use only the templated or cached insights)
+3. ~~Live LLM calls (use only the templated or cached insights)~~ **Applied in Phase 6**
 4. Financial Readiness screen (mention it in the pitch instead)
 5. Insights screen (merge its content into the Dashboard)
 6. Learning from user corrections (keep the prompt, skip the learning)

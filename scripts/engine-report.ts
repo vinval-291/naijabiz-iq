@@ -10,6 +10,7 @@ import { CATEGORY_LABELS } from "../src/lib/categories";
 import { NO_CONFIRMATIONS, classifyTransactions, confirmCategory, needsReview } from "../src/lib/engine/classify";
 import { analyze } from "../src/lib/engine";
 import { assessAffordability } from "../src/lib/engine/affordability";
+import { checkNumbers } from "../src/lib/engine/insights";
 import { MINIMUM_RESERVE_DAYS } from "../src/lib/engine/metrics";
 import { formatNaira } from "../src/lib/format";
 import type { Account, Category, RawTransaction } from "../src/lib/types";
@@ -60,6 +61,13 @@ console.log(`  ${f.reason}`);
 console.log(`  Expected in ${naira(f.expectedInflow)} · out ${naira(f.expectedOutflow)} · end balance ${naira(f.projectedEndBalance)}`);
 console.log(`  Lowest ${naira(f.lowestBalance)} on ${f.lowestBalanceDate} (a drop of ${naira(a.cash.cashBalance - f.lowestBalance)})`);
 console.log(`  Scheduled: ${f.scheduled.map((p) => `${p.date.slice(5)} ${p.label} ${k(p.amount).trim()}`).join(" · ")}`);
+
+console.log("\nInsights (first = dashboard key insight)");
+for (const i of a.insights) {
+  const check = checkNumbers(`${i.title} ${i.body}`, a.insightFacts);
+  console.log(`  [${i.tone}] ${i.title}${check.ok ? "" : `  ⚠ unverified: ${check.unmatched.join(", ")}`}`);
+  console.log(`         ${i.body}`);
+}
 
 console.log("\nRecommendations");
 for (const r of a.recommendations) {

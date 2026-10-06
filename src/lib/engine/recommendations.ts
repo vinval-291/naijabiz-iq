@@ -4,7 +4,7 @@ import { CATEGORY_LABELS } from "../categories";
 import { formatDayMonth, formatMonthName, formatName, formatNaira, formatNairaCompact, formatPercent } from "../format";
 import type { Account, Category, ClassifiedTransaction, Forecast, Recommendation } from "../types";
 import { needsReview } from "./classify";
-import { cashPosition, monthlyMetrics, threeMonthGrowth, threeMonthWindows } from "./metrics";
+import { cashPosition, monthlyMetrics, threeMonthGrowth, threeMonthWindows, type GrowthSummary } from "./metrics";
 import { sum } from "./stats";
 
 const PRIORITY_ORDER: Recommendation["priority"][] = ["High", "Medium", "Low", "Info"];
@@ -14,6 +14,22 @@ const MAX_RISING_COSTS = 2;
 const SUPPLIER_SHARE = 0.4;
 /** Above this share of running costs, uncategorized spending can distort category growth (SPEC §5). */
 const UNCATEGORIZED_DISTORTION = 0.03;
+
+export function isCategoryGrowthDistorted(g: GrowthSummary): boolean {
+  const share = (p: GrowthSummary["current"] | null) =>
+    p && p.operatingCosts ? (p.byCategory.UNCATEGORIZED ?? 0) / p.operatingCosts : 0;
+  return share(g.current) > UNCATEGORIZED_DISTORTION || share(g.previous) > UNCATEGORIZED_DISTORTION;
+}
+
+/** Running-cost categories that grew more than 25% (3m), largest first. Empty when the comparison could be distorted. */
+export function risingCosts(g: GrowthSummary): { category: Category; growth: number }[] {
+  if (!g.previous || isCategoryGrowthDistorted(g)) return [];
+  return (Object.entries(g.categoryGrowth) as [Category, number][])
+    .filter(([c, v]) => c !== "INVENTORY" && c !== "UNCATEGORIZED" && v > RISING_COST_PCT)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, MAX_RISING_COSTS)
+    .map(([category, growth]) => ({ category, growth }));
+}
 
 export function recommendations(
   transactions: ClassifiedTransaction[],
@@ -75,14 +91,9 @@ export function recommendations(
   }
 
   // 5: rising running costs — only when uncategorized spending can't distort the comparison
-  const share = (p: typeof g.current | null) => (p && p.operatingCosts ? (p.byCategory.UNCATEGORIZED ?? 0) / p.operatingCosts : 0);
-  const distorted = share(g.current) > UNCATEGORIZED_DISTORTION || share(g.previous) > UNCATEGORIZED_DISTORTION;
-  if (!distorted && g.previous) {
-    const rising = (Object.entries(g.categoryGrowth) as [Category, number][])
-      .filter(([c, v]) => c !== "INVENTORY" && c !== "UNCATEGORIZED" && v > RISING_COST_PCT)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, MAX_RISING_COSTS);
-    for (const [category, value] of rising) {
+  const distorted = isCategoryGrowthDistorted(g);
+  if (g.previous) {
+    for (const { category, growth: value } of risingCosts(g)) {
       const label = CATEGORY_LABELS[category];
       recs.push({
         id: `rising-${category.toLowerCase()}`, priority: "Medium",

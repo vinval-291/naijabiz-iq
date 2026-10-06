@@ -128,18 +128,37 @@ export interface ReadinessProfile {
   nextSteps: string[];
 }
 
+/** Verified numbers the insight layer is allowed to talk about (SPEC.md §11). */
 export interface InsightFacts {
   asOf: string;
-  revenueGrowth3m: number;
-  expenseGrowth3m: number;
-  inventoryGrowth3m: number;
+  lastMonth: string | null;            // "2026-09"
+  lastMonthRevenue: number;
+  lastMonthExpenses: number;
+  revenueGrowth3m: number | null;
+  expenseGrowth3m: number | null;
+  inventoryGrowth3m: number | null;
   cashBalance: number;
-  cashBalanceChangeMoM: number;
+  previousMonthBalance: number | null;
+  cashBalanceChangeMoM: number | null;
+  minimumReserve: number;
   healthScore: number;
-  healthScorePrev?: number;
+  healthBand: HealthScore["band"];
+  healthScorePrev: number | null;
+  healthPrevDate: string | null;
+  weakestHealthComponents: string[];   // labels, weakest first
   forecastRisk: RiskLevel;
   lowestBalance: number;
   lowestBalanceDate: string;
+  horizonDays: number;
   flaggedCount: number;
-  topRisingCost?: { category: Category; growth: number };
+  flaggedTotal: number;
+  /** Null while uncategorized spending could distort category growth. */
+  topRisingCost: { category: Category; growth: number } | null;
+}
+
+export interface Insight {
+  id: string;
+  tone: "positive" | "warning" | "neutral";
+  title: string;
+  body: string;
 }

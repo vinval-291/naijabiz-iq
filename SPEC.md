@@ -455,6 +455,30 @@ The LLM receives only a `InsightFacts` JSON object built by the engine. It never
 
 **Model:** Claude API. The exact model is chosen in Phase 6.
 
+### Phase 6 decision and result: no paid API for the MVP
+
+The team chose not to pay for an LLM API for the MVP (cut-list item 3 in PHASES.md). The insight layer is **template-based**:
+
+| Piece | File | What it does |
+|---|---|---|
+| `buildInsightFacts(analysis)` | `src/lib/engine/insights.ts` | The only numbers the insight layer may mention |
+| `writeInsights(facts)` | same | Plain-language insights, most important first. The first one is the dashboard's key insight. |
+| `checkNumbers(text, facts)` | same | Every ₦ amount, % and number ≥ 10 must match a fact within display rounding (₦…K ±₦500, ₦…M ±₦5,000, whole % ±0.5) |
+
+**Insights on September 30** (all pass `checkNumbers`):
+1. ⚠ *Sales are growing, but stock spending is growing faster.* "Over the last 3 months your sales rose 12%, but your stock purchases rose 31%. If this continues, more of your cash will be tied up in stock and less will be free for running costs."
+2. ⚠ *You spent more than you earned in September.* "You earned ₦2.76M from sales and spent ₦2.92M, so your cash went down."
+3. ⚠ *Your cash balance is shrinking.* "Your balance fell 22% during September, from ₦740K to ₦580K."
+4. ⚠ *Cash may get tighter in the next two weeks.* "Based on your recent patterns, your balance is likely to be lowest around 12 Oct, at about ₦393K, as supplier payments fall due. That's still above the ₦180K we suggest keeping, but there's less room for extra spending."
+5. ⚠ *Your Business Health Score has dropped.* "It fell from 84 on 30 Jun to 66 today. The weakest areas are expense management and cash-flow stability."
+6. ○ *7 transactions still need your input.* "… worth ₦220K in total. Telling us what they were makes your numbers more accurate."
+
+After one diesel purchase is confirmed, *"Generator fuel costs are rising — You spent 58% more on generator fuel …"* appears, and item 6 drops to 2 transactions (₦67K).
+
+**Adding a model later (optional):** send only `InsightFacts` as JSON with the prompt rules above, run every response through `checkNumbers`, and fall back to `writeInsights` per insight on failure or timeout. Free tiers (e.g. Google Gemini) would keep the cost at zero.
+
+**Pitch wording:** describe it accurately, e.g. "the engine calculates, and the insight layer explains the results in plain language, with every number checked against the engine". Don't claim a live LLM writes the insights.
+
 ---
 
 ## 12. Shared types

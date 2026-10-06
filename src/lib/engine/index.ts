@@ -1,8 +1,10 @@
 // One call that produces everything the app shows for a given date.
 
 import type {
-  Account, ClassifiedTransaction, Forecast, HealthScore, PeriodMetrics, RawTransaction, ReadinessProfile, Recommendation,
+  Account, ClassifiedTransaction, Forecast, HealthScore, Insight, InsightFacts, PeriodMetrics, RawTransaction,
+  ReadinessProfile, Recommendation,
 } from "../types";
+import { buildInsightFacts, writeInsights } from "./insights";
 import { NO_CONFIRMATIONS, classifyTransactions, needsReview, type Confirmations } from "./classify";
 import { forecastCash } from "./forecast";
 import { healthScore } from "./health";
@@ -24,6 +26,9 @@ export interface Analysis {
   forecast: Forecast;
   recommendations: Recommendation[];
   readiness: ReadinessProfile;
+  /** The verified numbers the insight layer may mention, and the insights written from them. */
+  insightFacts: InsightFacts;
+  insights: Insight[];
 }
 
 export function analyze(
@@ -41,7 +46,7 @@ export function analyze(
       ? healthScore(classifyTransactions(raw.filter((t) => t.date <= previousEnd), confirmations), account, previousEnd)
       : null;
 
-  return {
+  const base = {
     asOf,
     account,
     transactions,
@@ -55,4 +60,6 @@ export function analyze(
     recommendations: recommendations(transactions, account, asOf, forecast),
     readiness: readinessProfile(transactions, account, asOf),
   };
+  const insightFacts = buildInsightFacts(base);
+  return { ...base, insightFacts, insights: writeInsights(insightFacts) };
 }
