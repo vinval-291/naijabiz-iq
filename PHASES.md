@@ -144,11 +144,13 @@ Decided and recorded in `SPEC.md`:
 
 ## Phase 5 — "Can I Afford This?"
 
-- [ ] Inputs: amount and optional purpose
-- [ ] Outputs: current cash, purchase amount, upcoming expenses, remaining buffer, verdict, recommended range
-- [ ] Test cases: large → Cannot safely afford; ₦300K → Careful (range ₦200K–₦230K); small → Comfortable
+- [x] Inputs: amount and optional purpose (Stock / Equipment / Personal / Other)
+- [x] Outputs: current cash, purchase amount, upcoming expenses, remaining buffer, verdict, recommended range, plain-language notes ([affordability.ts](src/lib/engine/affordability.ts))
+- [x] Test cases: ₦500K → Cannot; ₦300K → Careful (range ₦180K–₦210K); ₦100K → Comfortable
 
 **Done when:** all three test cases return the expected verdicts.
+
+**Status: ✅ Done.** All three verdicts as expected; 76 tests passing. **The engine is complete** (Phases 2–5): every number in the demo now comes from tested code.
 
 ---
 

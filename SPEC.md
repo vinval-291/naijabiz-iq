@@ -354,6 +354,22 @@ If max safe ≤ 0, show no range. Show "Wait until cash improves" instead.
 
 If `purpose` is Stock and inventory growth is more than 10 points above revenue growth, add: "Your stock spending is already growing faster than your sales."
 
+**Phase 5 result** (`src/lib/engine/affordability.ts`, `assessAffordability(amount, analysis, purpose?)`):
+
+| Amount | Verdict | Buffer after expenses | Notes shown |
+|---|---|---:|---|
+| ₦100,000 | **Comfortable** — "Yes, you can afford this comfortably." | ₦293,038 | — |
+| ₦300,000 (Stock) | **Careful** — "You can, but be careful." | ₦93,038 | ~₦93K left, below the ₦180K reserve · spending ₦180K–₦210K keeps the reserve intact · cash lowest around 12 Oct, so buying after then is safer · stock already growing faster than sales (+31% vs +12%) |
+| ₦500,000 | **Cannot** — "Not right now — this could leave you short." | −₦106,962 | ~₦107K short of expected expenses · the ₦180K–₦210K range · the low-cash date |
+
+All three share: current cash ₦580,000, upcoming expected expenses ₦186,962 (from the forecast), minimum reserve ₦180,000, max safe ₦213,038, recommended range **₦180,000 – ₦210,000**.
+
+Other rules:
+- The low-cash-date note appears only when the verdict isn't Comfortable.
+- A "Personal" purpose adds a gentle note that personal withdrawals reduce business cash.
+- Amounts are rounded to whole naira; zero, negative or non-numeric amounts are rejected.
+- Upcoming expenses never go below 0, even when the forecast rises.
+
 ---
 
 ## 9. Recommendations (Phase 4)
@@ -584,7 +600,7 @@ The engine is correct when, with `asOf` = September 30, 2026:
 - [x] Classification accuracy ≥ 85% (97.6%); 4–10 transactions flagged (7)
 - [x] Forecast risk **Medium**; lowest balance ₦393K (target ₦415K ±₦40K)
 - [x] Minimum reserve ≈ ₦180K (Phase 3)
-- [ ] ₦300K → Careful, range ≈ ₦180K–₦210K; ₦100K → Comfortable; ₦500K → Cannot (Phase 5)
+- [x] ₦300K → Careful, range ₦180K–₦210K; ₦100K → Comfortable; ₦500K → Cannot
 - [x] Readiness 72–82, band **Developing** (75)
 - [x] Recommendations include "Protect your operating cash reserve" (High) and "Review your stock purchases" (Medium)
 

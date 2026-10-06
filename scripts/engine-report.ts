@@ -9,7 +9,9 @@ import transactionsJson from "../src/data/transactions.json";
 import { CATEGORY_LABELS } from "../src/lib/categories";
 import { NO_CONFIRMATIONS, classifyTransactions, confirmCategory, needsReview } from "../src/lib/engine/classify";
 import { analyze } from "../src/lib/engine";
+import { assessAffordability } from "../src/lib/engine/affordability";
 import { MINIMUM_RESERVE_DAYS } from "../src/lib/engine/metrics";
+import { formatNaira } from "../src/lib/format";
 import type { Account, Category, RawTransaction } from "../src/lib/types";
 
 const args = process.argv.slice(2);
@@ -24,7 +26,7 @@ if (args.includes("--confirm-fuel")) {
 }
 
 const a = analyze(raw, account, ASOF, confirmations);
-const naira = (n: number) => `₦${Math.round(n).toLocaleString("en-NG")}`;
+const naira = formatNaira;
 const k = (n: number) => `${(n / 1000).toFixed(0)}K`.padStart(7);
 const pct = (n: number | null) => (n === null ? "n/a" : `${n >= 0 ? "+" : ""}${n.toFixed(1)}%`);
 
@@ -64,6 +66,15 @@ for (const r of a.recommendations) {
   console.log(`  [${r.priority}] ${r.title}`);
   console.log(`         ${r.message}`);
   console.log(`         Why: ${r.supportingMetric.label} = ${r.supportingMetric.value}`);
+}
+
+console.log("\nCan I Afford This?");
+for (const [amount, purpose] of [[100_000, undefined], [300_000, "Stock"], [500_000, undefined]] as const) {
+  const r = assessAffordability(amount, a, purpose);
+  const range = r.recommendedRange ? `${naira(r.recommendedRange[0])}–${naira(r.recommendedRange[1])}` : "none";
+  console.log(`  ${naira(amount)}${purpose ? ` (${purpose})` : ""}: ${r.verdict} — "${r.message}"`);
+  console.log(`         cash ${naira(r.currentCash)} − purchase − upcoming ${naira(r.upcomingExpenses)} = buffer ${naira(r.remainingBuffer)} · reserve ${naira(r.minimumReserve)} · range ${range}`);
+  r.notes.forEach((n) => console.log(`         • ${n}`));
 }
 
 const rd = a.readiness;
