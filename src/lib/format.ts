@@ -35,7 +35,13 @@ export function formatMonthName(date: string): string {
   return MONTHS_LONG[Number(date.slice(5, 7)) - 1];
 }
 
-/** "Adebayo Provisions Ltd" from "ADEBAYO PROVISIONS LTD" */
+/** Acronyms that stay upper-case in names. */
+const ACRONYMS = new Set(["IBEDC", "MTN", "PSP", "LG", "POS", "ATM", "EMTL", "SMS"]);
+
+/** "Adebayo Provisions Ltd" from "ADEBAYO PROVISIONS LTD"; acronyms like "IBEDC" are kept. */
 export function formatName(s: string): string {
-  return s.toLowerCase().replace(/(^|[\s(&.-])([a-z])/g, (_, sep: string, c: string) => sep + c.toUpperCase());
+  return s
+    .toLowerCase()
+    .replace(/(^|[\s(&.-])([a-z])/g, (_, sep: string, c: string) => sep + c.toUpperCase())
+    .replace(/\b[A-Za-z]+\b/g, (w) => (ACRONYMS.has(w.toUpperCase()) ? w.toUpperCase() : w));
 }

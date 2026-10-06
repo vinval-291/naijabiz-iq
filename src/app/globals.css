@@ -1,26 +1,66 @@
 @import "tailwindcss";
 
+/* Brand tokens from brand/BRAND.md (Wema Bank's site colours + derived status colours). */
+@theme {
+  --color-brand: #981d87;
+  --color-brand-500: #a83595;
+  --color-brand-magenta: #ad1e9b;
+  --color-plum: #3b1439;
+  --color-aubergine: #4f2356;
+  --color-tint: #fff4ff;
+  --color-teal: #33cbb0;
+
+  --color-ink: #111928;
+  --color-muted: #5b6366;   /* derived: #858A8B fails AA on white for small text */
+  --color-line: #d1d5db;
+  --color-surface: #f7f7f8;
+
+  --color-positive: #33cbb0;
+  --color-positive-text: #0b7a66;
+  --color-caution: #ffd42d;
+  --color-caution-text: #8a5a00;
+  --color-danger: #e8323e;
+  --color-danger-text: #ac2932;
+
+  --font-display: var(--font-outfit), "Inter", sans-serif;
+  --font-sans: var(--font-inter), sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --radius-card: 16px;
+  --radius-input: 8px;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Money and metrics line up in columns. */
+.tabular {
+  font-feature-settings: "tnum";
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-magenta);
+  outline-offset: 2px;
+}
+
+/* Statement line → meaning reveal (Welcome hero and import). */
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+.reveal {
+  animation: reveal 420ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+  }
 }

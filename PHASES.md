@@ -172,12 +172,18 @@ Decided and recorded in `SPEC.md`:
 
 ## Phase 7 — App foundation
 
-- [ ] Next.js + Tailwind project, deployed to Vercel early (Day 2 AM)
-- [ ] Welcome and Business Setup screens (answers stored in `localStorage`)
-- [ ] "Connect Wema Account" simulation: consent → loading → "247 transactions imported"
-- [ ] CSV upload fallback
+- [x] Next.js + Tailwind project with brand tokens and fonts (Outfit, Inter, IBM Plex Mono for statement lines)
+- [ ] Deployed to Vercel (needs the team's GitHub/Vercel account; see the steps in the Phase 7 hand-over)
+- [x] Welcome screen: hero shows real statement lines and what NaijaBiz IQ understood from each ([page.tsx](src/app/page.tsx))
+- [x] Business Setup screen, pre-filled for Aisha (answers stored in `localStorage`) ([setup](src/app/setup/page.tsx))
+- [x] "Connect Wema Account" simulation: consent (labelled as a prototype) → live import animation → "247 transactions imported · 240 understood automatically · 7 need your input" ([connect](src/app/connect/page.tsx))
+- [x] CSV upload fallback with clear error messages ([csv.ts](src/lib/csv.ts)) and a downloadable sample
+- [x] App state + engine wired together ([app-state.tsx](src/components/app-state.tsx)); placeholder dashboard proves the pipeline
+- [x] Browser smoke test on desktop and mobile in Edge: `npm run smoke` (start the app with `npx next start -p 3100` first)
 
 **Done when:** the connection flow loads the dataset and reaches the dashboard.
+
+**Status: ✅ Done**, except the Vercel deploy. 94 tests passing; smoke test passes on desktop and mobile.
 
 ---
 

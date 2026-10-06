@@ -1,6 +1,7 @@
 // 14-day cash-flow forecast (SPEC.md §7). An estimate from recent patterns, never a promise.
 
 import { CATEGORY_LABELS } from "../categories";
+import { formatName } from "../format";
 import type { Account, ClassifiedTransaction, Forecast, RiskLevel, ScheduledPayment } from "../types";
 import { addDays } from "./dates";
 import { balanceAt, cashPosition } from "./metrics";
@@ -77,14 +78,10 @@ export function forecastCash(transactions: ClassifiedTransaction[], account: Acc
 function forecastReason(risk: RiskLevel, scheduled: ScheduledPayment[], lowestDate: string): string {
   const before = scheduled.filter((p) => p.date <= lowestDate);
   const biggest = [...(before.length ? before : scheduled)].sort((a, b) => b.amount - a.amount).slice(0, 2);
-  const names = biggest.map((p) => (p.category === "INVENTORY" ? `your payment to ${titleCase(p.label)}` : CATEGORY_LABELS[p.category].toLowerCase()));
+  const names = biggest.map((p) => (p.category === "INVENTORY" ? `your payment to ${formatName(p.label)}` : CATEGORY_LABELS[p.category].toLowerCase()));
   const drivers = names.length ? ` because ${names.join(" and ")} ${names.length > 1 ? "are" : "is"} due` : "";
 
   if (risk === "High") return `Based on your recent patterns, your cash may fall below your safety reserve${drivers}.`;
   if (risk === "Medium") return `Based on your recent patterns, your cash is likely to get tighter over the next two weeks${drivers}.`;
   return "Based on your recent patterns, your cash position should stay comfortable over the next two weeks.";
-}
-
-function titleCase(s: string): string {
-  return s.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase());
 }
