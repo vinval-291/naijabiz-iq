@@ -253,7 +253,7 @@ Build in this order. Stop at the end of any tier if time runs out.
 ## Phase 10 — Pitch and demo (owned by Biz)
 
 Biz can start on October 6, while Dev builds:
-- [ ] 10-slide deck (structure in master plan, Phase 21)
+- [x] Deck: cover + 10 slides with speaker notes, real numbers and app screenshots ([NaijaBiz IQ Pitch](https://claude.ai/artifact/HsXDE6A1DwFPKbpQnWvKe2)). **Biz:** fill in `[Team name]`, `[Presenter names]` and `[Contact]` on the cover and closing slides
 - [ ] Aisha demo script (master plan, Phase 20), updated with real numbers once Phase 4 is done
 - [ ] Answers to likely judge questions: data privacy and consent, how Wema benefits, why this isn't a loan product, accuracy of classification
 - [ ] At least 2 timed rehearsals together on Day 3
