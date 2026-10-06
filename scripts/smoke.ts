@@ -51,6 +51,37 @@ async function journey(label: string, viewport: { width: number; height: number 
   await page.getByText("Key insight").waitFor();
   console.log("  ✓ dashboard survives refresh");
 
+  // Review question: confirming one bare card purchase recognizes the similar ones.
+  await page.goto(`${BASE}/transactions?view=review`);
+  await page.getByRole("tab", { name: "Needs your input (7)" }).waitFor();
+  await page.getByRole("button", { name: /POS PURCHASE/ }).first().click();
+  await shot(page, `${label}-7-review`);
+  await page.getByRole("button", { name: "Generator fuel" }).click();
+  await page.getByText("We also recognized 4 similar transactions").waitFor();
+  await page.getByRole("tab", { name: "Needs your input (2)" }).waitFor();
+  await shot(page, `${label}-8-reviewed`);
+
+  // Can I afford this? ₦300K → careful; the suggested amount → comfortable.
+  await page.goto(`${BASE}/afford`);
+  await page.getByLabel("How much do you want to spend?").fill("300000");
+  await page.getByRole("button", { name: "Check", exact: true }).click();
+  await page.getByRole("heading", { name: "You can, but be careful." }).waitFor();
+  await shot(page, `${label}-9-afford`);
+  await page.getByRole("button", { name: /^Check ₦\d+K instead$/ }).click();
+  await page.getByRole("heading", { name: "Yes, you can afford this comfortably." }).waitFor();
+  console.log("  ✓ suggested amount is comfortable");
+
+  for (const [path, text, name] of [
+    ["/forecast", "Medium cash pressure", "10-forecast"],
+    ["/insights", "Business Health Score", "11-insights"],
+    ["/advice", "Protect your operating cash reserve", "12-advice"],
+    ["/readiness", "Next steps", "13-readiness"],
+  ] as const) {
+    await page.goto(`${BASE}${path}`);
+    await page.getByText(text).first().waitFor();
+    await shot(page, `${label}-${name}`);
+  }
+
   await browser.close();
 }
 

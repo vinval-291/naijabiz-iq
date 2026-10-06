@@ -199,6 +199,16 @@ Build in this order. Stop at the end of any tier if time runs out.
 
 **Done when:** the full demo journey runs end to end on the deployed URL.
 
+**Status: ✅ Done locally (all three tiers).** Only the deployed-URL check remains, which waits on the Vercel deploy.
+- [x] App shell: desktop sidebar, mobile bottom tabs (Home · Money · Afford · Forecast · More); sends visitors to Connect if no account is connected
+- [x] **Dashboard:** key insight, 4 stat tiles with month-on-month change, "Money in vs money out" chart, Health Score (84 → 66), next-two-weeks forecast, top recommendation, review prompt
+- [x] **Can I afford this?:** amount + purpose, verdict, step-by-step sum, reserve bar, safer range with a one-tap "Check ₦210K instead"
+- [x] **Transactions:** filters (Needs your input / All / Money in / Money out), confidence ("Likely …", %), "Why?" reasons, inline review question; confirming one diesel purchase shows "We also recognized 4 similar transactions"
+- [x] **Forecast:** risk, reason, 14-day balance chart with reserve line and payment markers, regular payments due
+- [x] **Insights** (with full Health Score breakdown), **Recommendations** (grouped by urgency, with "Why am I seeing this?" and action links), **Financial readiness**, **More**
+- [x] Charts: inline SVG; colours validated with the dataviz palette script; hover + keyboard tooltips; "Show as table" on every chart
+- [x] `npm run smoke` covers every screen and both key interactions on desktop and mobile; 94 unit tests passing
+
 ---
 
 ## Phase 9 — Testing and hardening

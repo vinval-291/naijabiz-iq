@@ -1,0 +1,51 @@
+"use client";
+
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAppState } from "@/components/app-state";
+import { BadgeIcon, BulbIcon, CheckListIcon } from "@/components/icons";
+import { BuiltForWema } from "@/components/logo";
+import { PageHeader } from "@/components/ui";
+import { DEMO_ACCOUNT } from "@/lib/demo";
+
+const LINKS = [
+  { href: "/insights", label: "Insights", detail: "What your numbers mean, and your Business Health Score", icon: BulbIcon },
+  { href: "/advice", label: "Recommendations", detail: "What to do next, most important first", icon: CheckListIcon },
+  { href: "/readiness", label: "Financial readiness", detail: "The habits your records show", icon: BadgeIcon },
+];
+
+export default function MorePage() {
+  const router = useRouter();
+  const { connection, reset } = useAppState();
+
+  return (
+    <>
+      <PageHeader title="More" />
+      <ul className="divide-y divide-line rounded-card border border-line">
+        {LINKS.map(({ href, label, detail, icon: I }) => (
+          <li key={href}>
+            <Link href={href} className="flex items-center gap-4 px-4 py-4 hover:bg-surface">
+              <span className="text-brand"><I /></span>
+              <span className="flex-1">
+                <span className="block font-medium text-ink">{label}</span>
+                <span className="text-sm text-muted">{detail}</span>
+              </span>
+              <span aria-hidden="true" className="text-muted">›</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-8 rounded-card bg-surface p-5 text-sm">
+        <p className="font-medium text-ink">Connected account</p>
+        <p className="mt-1 text-muted">
+          {connection?.source === "csv" ? `Uploaded statement: ${connection.fileName}` : `Wema business account ${DEMO_ACCOUNT.accountNumberMasked} (simulated)`}
+        </p>
+        <button type="button" onClick={() => { reset(); router.push("/"); }} className="mt-3 font-semibold text-danger-text underline-offset-2 hover:underline">
+          Disconnect and start over
+        </button>
+      </div>
+      <div className="mt-8"><BuiltForWema /></div>
+    </>
+  );
+}

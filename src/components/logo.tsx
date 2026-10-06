@@ -27,13 +27,13 @@ export function Logo({ size = 32, onDark = false }: { size?: number; onDark?: bo
 }
 
 /** "Built for Wema Bank" lockup. The Wema logo is used unmodified (brand/BRAND.md). */
-export function BuiltForWema() {
+export function BuiltForWema({ compact = false }: { compact?: boolean }) {
   return (
-    <span className="inline-flex items-center gap-3 text-xs text-muted">
+    <span className="inline-flex items-center gap-3 whitespace-nowrap text-xs text-muted">
       <span>Built for</span>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/brand/wema-logo-full.svg" alt="Wema Bank" width={52} height={30} />
-      <span className="hidden sm:inline">· Hackaholics 7.0 prototype</span>
+      {!compact && <span className="hidden sm:inline">· Hackaholics 7.0 prototype</span>}
     </span>
   );
 }

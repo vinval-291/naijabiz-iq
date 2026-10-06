@@ -22,6 +22,11 @@
   --color-danger: #e8323e;
   --color-danger-text: #ac2932;
 
+  /* Chart series (validated with the dataviz palette script: all checks pass, light mode). */
+  --color-series-sales: #981d87;
+  --color-series-spending: #3f7fd9;
+  --color-grid: #e5e7eb;
+
   --font-display: var(--font-outfit), "Inter", sans-serif;
   --font-sans: var(--font-inter), sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;

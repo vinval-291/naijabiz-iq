@@ -30,6 +30,16 @@ export function formatDayMonth(date: string): string {
   return `${Number(date.slice(8, 10))} ${MONTHS[Number(date.slice(5, 7)) - 1]}`;
 }
 
+/** "30 September 2026" */
+export function formatLongDate(date: string): string {
+  return `${Number(date.slice(8, 10))} ${MONTHS_LONG[Number(date.slice(5, 7)) - 1]} ${date.slice(0, 4)}`;
+}
+
+/** "Sep" from "2026-09" */
+export function formatMonthShort(date: string): string {
+  return MONTHS[Number(date.slice(5, 7)) - 1];
+}
+
 /** "September" from "2026-09" or "2026-09-30" */
 export function formatMonthName(date: string): string {
   return MONTHS_LONG[Number(date.slice(5, 7)) - 1];
