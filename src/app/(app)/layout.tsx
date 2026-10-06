@@ -59,7 +59,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
 
       <div className="flex min-w-0 flex-1 flex-col">
         {/* Mobile top bar */}
-        <header className="flex items-center justify-between border-b border-line px-4 py-3 lg:hidden">
+        <header className="sticky top-0 z-20 flex h-13 items-center justify-between border-b border-line bg-white/95 px-4 backdrop-blur lg:hidden">
           <Link href="/dashboard" aria-label="NaijaBiz IQ home"><Logo size={26} /></Link>
           <span className="truncate pl-4 text-sm text-muted">{profile?.businessName}</span>
         </header>

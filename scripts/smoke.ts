@@ -11,7 +11,18 @@ const OUT = process.argv[3] ?? ".smoke";
 mkdirSync(OUT, { recursive: true });
 
 const errors: string[] = [];
+
+/** Fails the run if anything makes the page wider than the screen (the browser would zoom out). */
+async function assertNoOverflow(page: Page, where: string) {
+  const { viewport, scrollWidth } = await page.evaluate(() => ({
+    viewport: document.documentElement.clientWidth,
+    scrollWidth: document.documentElement.scrollWidth,
+  }));
+  if (scrollWidth > viewport) errors.push(`${where}: page is ${scrollWidth}px wide on a ${viewport}px screen`);
+}
+
 async function shot(page: Page, name: string) {
+  await assertNoOverflow(page, name);
   await page.screenshot({ path: join(OUT, `${name}.png`), fullPage: true });
   console.log(`  ✓ ${name}`);
 }
@@ -82,12 +93,26 @@ async function journey(label: string, viewport: { width: number; height: number 
     await shot(page, `${label}-${name}`);
   }
 
+  // Charts drawn at desktop width must shrink when the screen narrows (DevTools, rotating a phone).
+  if (viewport.width >= 1024) {
+    for (const path of ["/dashboard", "/forecast"]) {
+      await page.goto(`${BASE}${path}`);
+      await page.waitForTimeout(500);
+      await page.setViewportSize({ width: 375, height: 812 });
+      await page.waitForTimeout(500);
+      await assertNoOverflow(page, `${label} ${path} after narrowing to 375px`);
+      await page.setViewportSize(viewport);
+    }
+    console.log("  ✓ charts shrink when the screen narrows");
+  }
+
   await browser.close();
 }
 
 (async () => {
   await journey("desktop", { width: 1280, height: 800 });
   await journey("mobile", { width: 390, height: 844 });
+  await journey("small", { width: 320, height: 640 });
   if (errors.length) {
     console.log(`\n✗ ${errors.length} browser error(s):`);
     errors.forEach((e) => console.log(`  ${e}`));

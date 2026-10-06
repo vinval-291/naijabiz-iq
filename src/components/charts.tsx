@@ -31,7 +31,7 @@ function niceTicks(max: number, count = 4): number[] {
 function ChartFrame({ legend, table, children }: { legend?: ReactNode; table: ReactNode; children: ReactNode }) {
   const [showTable, setShowTable] = useState(false);
   return (
-    <div>
+    <div className="min-w-0">
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-4 text-sm text-ink">{legend}</div>
         <button type="button" onClick={() => setShowTable((v) => !v)} className="text-sm font-medium text-brand underline-offset-2 hover:underline" aria-pressed={showTable}>
@@ -61,6 +61,9 @@ function Tooltip({ x, width, children }: { x: number; width: number; children: R
   );
 }
 
+/** Below this chart width (px), use the compact phone layout. */
+const NARROW = 420;
+
 const thClass = "py-2 pr-4 text-left font-medium text-muted";
 const tdClass = "tabular py-2 pr-4 text-ink";
 
@@ -73,15 +76,16 @@ const SPENDING = "var(--color-series-spending)";
 export function MoneyInOutChart({ months }: { months: PeriodMetrics[] }) {
   const [ref, width] = useWidth<HTMLDivElement>();
   const [active, setActive] = useState<number | null>(null);
-  const height = 240;
-  const pad = { top: 16, right: 4, bottom: 28, left: 44 };
+  const narrow = width < NARROW;
+  const height = narrow ? 200 : 240;
+  const pad = { top: 16, right: 4, bottom: 28, left: 40 };
   const plotW = Math.max(0, width - pad.left - pad.right);
   const plotH = height - pad.top - pad.bottom;
   const ticks = niceTicks(Math.max(...months.flatMap((m) => [m.revenue, m.expenses])));
   const yMax = ticks[ticks.length - 1];
   const y = (v: number) => pad.top + plotH - (v / yMax) * plotH;
   const band = plotW / months.length;
-  const bar = Math.min(24, (band - 16) / 2);
+  const bar = Math.max(4, Math.min(24, (band - (narrow ? 8 : 16)) / 2));
 
   const table = (
     <table className="w-full text-sm">
@@ -101,7 +105,7 @@ export function MoneyInOutChart({ months }: { months: PeriodMetrics[] }) {
 
   return (
     <ChartFrame table={table} legend={<><LegendKey color={SALES} label="Sales" /><LegendKey color={SPENDING} label="Spending" /></>}>
-      <div ref={ref} className="relative" onMouseLeave={() => setActive(null)}>
+      <div ref={ref} className="relative w-full min-w-0 overflow-hidden" onMouseLeave={() => setActive(null)}>
         {width > 0 && (
           <svg width={width} height={height} role="img" aria-label="Monthly sales and spending, April to September">
             {ticks.map((t) => (
@@ -162,8 +166,11 @@ export function ForecastChart({ forecast, startBalance, minimumReserve }: { fore
   const [ref, width] = useWidth<HTMLDivElement>();
   const [active, setActive] = useState<number | null>(null);
   const points = [{ date: forecast.asOf, balance: startBalance }, ...forecast.daily];
-  const height = 260;
-  const pad = { top: 28, right: 12, bottom: 28, left: 48 };
+  const narrow = width < NARROW;
+  const height = narrow ? 220 : 260;
+  const pad = { top: 28, right: 12, bottom: 28, left: 44 };
+  // Fewer date labels on a phone so they never collide (Today · 7 Oct · 14 Oct).
+  const labelEvery = narrow ? 7 : 2;
   const plotW = Math.max(0, width - pad.left - pad.right);
   const plotH = height - pad.top - pad.bottom;
   const ticks = niceTicks(Math.max(...points.map((p) => p.balance), minimumReserve) * 1.05);
@@ -199,7 +206,7 @@ export function ForecastChart({ forecast, startBalance, minimumReserve }: { fore
 
   return (
     <ChartFrame table={table} legend={<><LegendKey color={SALES} label="Expected balance" kind="line" /><LegendKey color="var(--color-danger-text)" label="Minimum reserve" kind="line" /></>}>
-      <div ref={ref} className="relative touch-pan-y" onMouseMove={(e) => pick(e.clientX)} onMouseLeave={() => setActive(null)}
+      <div ref={ref} className="relative w-full min-w-0 touch-pan-y overflow-hidden" onMouseMove={(e) => pick(e.clientX)} onMouseLeave={() => setActive(null)}
         onTouchStart={(e) => pick(e.touches[0].clientX)} onTouchMove={(e) => pick(e.touches[0].clientX)}
         tabIndex={0} role="group" aria-label="Expected balance for the next 14 days. Use left and right arrow keys to move between days."
         onKeyDown={(e) => {
@@ -231,7 +238,7 @@ export function ForecastChart({ forecast, startBalance, minimumReserve }: { fore
               </g>
             )}
             {active !== null && <line x1={x(active)} x2={x(active)} y1={pad.top} y2={y(0)} stroke="var(--color-line)" strokeWidth={1} />}
-            {points.map((p, i) => (i === 0 || i % 2 === 0 || i === points.length - 1) && (
+            {points.map((p, i) => (i % labelEvery === 0 || i === points.length - 1) && (
               <text key={p.date} x={x(i)} y={height - 8} textAnchor={i === 0 ? "start" : i === points.length - 1 ? "end" : "middle"} className="fill-muted text-[11px]">
                 {i === 0 ? "Today" : formatDayMonth(p.date)}
               </text>

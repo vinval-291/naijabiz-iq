@@ -17,7 +17,8 @@ export function PageHeader({ eyebrow, title, intro, action }: { eyebrow?: string
 }
 
 export function Card({ children, className = "", as: Tag = "section" }: { children: ReactNode; className?: string; as?: "section" | "div" | "article" }) {
-  return <Tag className={`rounded-card border border-line bg-white p-5 sm:p-6 ${className}`}>{children}</Tag>;
+  // min-w-0: a grid/flex item must be able to shrink below its content (e.g. a chart drawn at a wider size).
+  return <Tag className={`min-w-0 rounded-card border border-line bg-white p-4 sm:p-6 ${className}`}>{children}</Tag>;
 }
 
 export function CardTitle({ children, action }: { children: ReactNode; action?: ReactNode }) {
@@ -41,9 +42,9 @@ export function TextLink({ href, children }: { href: string; children: ReactNode
 export function StatTile({ label, value, delta }: { label: string; value: string; delta?: { text: string; good: boolean | null } }) {
   const deltaClass = delta?.good === null || !delta ? "text-muted" : delta.good ? "text-positive-text" : "text-danger-text";
   return (
-    <div className="rounded-card bg-surface p-4 sm:p-5">
-      <dt className="text-sm text-muted">{label}</dt>
-      <dd className="mt-1 text-2xl font-semibold tracking-tight text-ink sm:text-[1.75rem]">{value}</dd>
+    <div className="min-w-0 rounded-card bg-surface p-3.5 sm:p-5">
+      <dt className="text-[13px] text-muted sm:text-sm">{label}</dt>
+      <dd className="mt-1 text-[1.375rem] font-semibold tracking-tight text-ink sm:text-[1.75rem]">{value}</dd>
       {delta && <dd className={`mt-0.5 text-sm font-medium ${deltaClass}`}>{delta.text}</dd>}
     </div>
   );

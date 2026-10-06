@@ -77,7 +77,7 @@ function Transactions() {
       <div role="tablist" aria-label="Filter transactions" className="mb-5 flex gap-2 overflow-x-auto pb-1">
         {tabs.map((tab) => (
           <button key={tab.id} role="tab" aria-selected={view === tab.id} onClick={() => setView(tab.id)}
-            className={`shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+            className={`h-11 shrink-0 rounded-full border px-4 text-sm font-medium transition-colors ${
               view === tab.id ? "border-brand bg-tint text-brand" : "border-line text-ink hover:border-brand"
             }`}>
             {tab.label}
@@ -91,7 +91,7 @@ function Transactions() {
 
       {[...byMonth].map(([month, rows]) => (
         <section key={month} className="mb-6">
-          <h2 className="sticky top-0 z-10 bg-white/95 py-2 text-sm font-semibold uppercase tracking-wider text-muted backdrop-blur">
+          <h2 className="sticky top-13 z-10 bg-white/95 py-2 lg:top-0 text-sm font-semibold uppercase tracking-wider text-muted backdrop-blur">
             {formatMonthName(month)} {month.slice(0, 4)}
           </h2>
           <ul className="divide-y divide-line rounded-card border border-line">
@@ -128,7 +128,7 @@ function Row({ t, expanded, onToggle, onAnswer }: { t: ClassifiedTransaction; ex
   const flagged = needsReview(t);
   return (
     <li className={flagged ? "bg-caution/5" : ""}>
-      <button type="button" onClick={onToggle} aria-expanded={expanded} className="flex w-full items-start gap-3 px-4 py-3.5 text-left hover:bg-surface/70 sm:gap-4">
+      <button type="button" onClick={onToggle} aria-expanded={expanded} className="flex w-full items-start gap-2.5 px-3 py-3.5 text-left hover:bg-surface/70 sm:gap-4 sm:px-4">
         <span className="w-14 shrink-0 whitespace-nowrap pt-0.5 text-sm text-muted">{formatDayMonth(t.date)}</span>
         <span className="min-w-0 flex-1">
           <span className={`block truncate font-mono text-[13px] ${t.description ? "text-ink" : "italic text-muted"}`}>{t.description || "(no description)"}</span>
@@ -141,14 +141,14 @@ function Row({ t, expanded, onToggle, onAnswer }: { t: ClassifiedTransaction; ex
       </button>
 
       {expanded && (
-        <div className="px-4 pb-4 sm:pl-20">
+        <div className="px-3 pb-4 sm:px-4 sm:pl-20">
           {flagged ? (
             <div className="rounded-input bg-white p-4 ring-1 ring-caution">
               <p className="font-medium text-ink">We couldn&apos;t confidently identify this transaction. What was this for?</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {REVIEW_OPTIONS[t.direction].map((o) => (
                   <button key={o.category} type="button" onClick={() => onAnswer(o.category)}
-                    className="rounded-full border border-line px-3.5 py-1.5 text-sm font-medium text-ink hover:border-brand hover:bg-tint hover:text-brand">
+                    className="h-10 rounded-full border border-line px-3.5 text-sm font-medium text-ink hover:border-brand hover:bg-tint hover:text-brand">
                     {o.label}
                   </button>
                 ))}

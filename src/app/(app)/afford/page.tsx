@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useAppState } from "@/components/app-state";
 import { Card, PageHeader, StatusPill, type Status } from "@/components/ui";
 import { PURPOSES, assessAffordability, type Purpose } from "@/lib/engine/affordability";
@@ -18,6 +18,15 @@ export default function AffordPage() {
   const [amountText, setAmountText] = useState("");
   const [purpose, setPurpose] = useState<Purpose | undefined>("Stock");
   const [result, setResult] = useState<AffordabilityResult | null>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
+
+  // On a phone the answer appears below the form: bring it into view after each check.
+  useEffect(() => {
+    if (!result || window.matchMedia("(min-width: 1024px)").matches) return;
+    const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    resultRef.current?.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" });
+  }, [result]);
+
   if (!analysis) return null;
 
   const check = (amount: number) => {
@@ -56,7 +65,7 @@ export default function AffordPage() {
                       setPurpose(next);
                       if (result) setResult(assessAffordability(result.amount, analysis, next));
                     }}
-                    className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors ${purpose === p ? "border-brand bg-tint text-brand" : "border-line text-ink hover:border-brand"}`}>
+                    className={`h-11 rounded-full border px-4 text-sm font-medium transition-colors ${purpose === p ? "border-brand bg-tint text-brand" : "border-line text-ink hover:border-brand"}`}>
                     {p}
                   </button>
                 ))}
@@ -75,7 +84,7 @@ export default function AffordPage() {
           </p>
         </Card>
 
-        <div aria-live="polite">
+        <div ref={resultRef} aria-live="polite" className="min-w-0 scroll-mt-16">
           {result ? <Result result={result} onCheck={check} /> : (
             <div className="grid h-full min-h-56 place-items-center rounded-card border border-dashed border-line p-8 text-center text-muted">
               Enter an amount to see what it would do to your cash.
@@ -107,12 +116,12 @@ function Result({ result: r, onCheck }: { result: AffordabilityResult; onCheck: 
         {rows.map(([label, value, sign]) => (
           <div key={label} className="flex justify-between gap-4 py-2.5">
             <dt className="text-muted">{label}</dt>
-            <dd className="tabular font-medium text-ink">{sign} {formatNaira(value)}</dd>
+            <dd className="tabular shrink-0 whitespace-nowrap font-medium text-ink">{sign ? `${sign} ` : ""}{formatNaira(value)}</dd>
           </div>
         ))}
         <div className="flex justify-between gap-4 py-3">
           <dt className="font-semibold text-ink">Left over</dt>
-          <dd className={`tabular text-lg font-semibold ${r.remainingBuffer < 0 ? "text-danger-text" : "text-ink"}`}>{formatNaira(r.remainingBuffer)}</dd>
+          <dd className={`tabular shrink-0 whitespace-nowrap text-lg font-semibold ${r.remainingBuffer < 0 ? "text-danger-text" : "text-ink"}`}>{formatNaira(r.remainingBuffer)}</dd>
         </div>
       </dl>
 
