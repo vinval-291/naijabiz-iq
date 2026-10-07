@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# naijabiz-iq
 
-## Getting Started
+Naija Business IQ: financial intelligence for Nigerian small businesses, built on Wema transactions.
+Built for **Wema Hackaholics 7.0** (University of Ibadan, 7–9 October 2026).
 
-First, run the development server:
+> Wema already has the transactions. NaijaBiz IQ turns those transactions into intelligence.
+
+NaijaBiz IQ reads a business's bank transactions and tells the owner, in plain words, where the money goes, what's coming next and whether they can afford a purchase. The demo follows Aisha, who runs a mini mart in Ibadan: her sales grew 12% in three months, but her stock spending grew 31%, so her cash is shrinking.
+
+**Prototype:** the Wema connection is simulated with a realistic 6-month demo dataset (247 transactions). No real account is accessed.
+
+## What it does
+
+| Feature | On the demo data |
+|---|---|
+| Categorizes every transaction, asks when unsure, learns from answers | 97.6% correct; 7 flagged; one answer recognizes 4 similar transactions |
+| Sales, spending, cash flow, growth, minimum cash reserve | Sales +12% vs stock +31% (last 3 months) |
+| Business Health Score (not a credit score) | 66 Healthy, down from 84 in June |
+| 14-day cash forecast | Medium risk, lowest ≈ ₦393K around 12 Oct |
+| Recommendations and plain-language insights | Every number checked against the engine |
+| **Can I afford this?** | ₦300K → "You can, but be careful", safer range ₦180K–₦210K |
+| Financial readiness profile (never a loan decision) | 75 Developing |
+
+The engine calculates every number; the insight layer only explains them. Works offline, mobile-first, WCAG 2.1 AA checked.
+
+## Run it
+
+Requires Node.js 20.9+.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000  (another port: npm run dev -- -p 3001)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+For the demo, use the faster production build: `npm run build` then `npm start`. See [DEMO.md](DEMO.md) for the click-by-click demo script, reset steps and fallbacks.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | What it does |
+|---|---|
+| `npm test` | Unit tests (engine, classifier, forecast, affordability, insights, CSV) |
+| `npm run data:generate` / `data:validate` | Regenerate / check the demo dataset |
+| `npm run engine:report [date]` | Print every number the app shows (`-- --confirm-fuel` for the "after" state) |
+| `npm run engine:classify-report` | Categorization accuracy against the hidden ground truth |
+| `npm run smoke -- <url>` | Click through every screen in Edge on desktop, 390px and 320px |
+| `npm run a11y -- <url>` | Accessibility scan of every screen (axe, WCAG 2.1 AA) |
+| `npm run record-demo -- <url> desktop\|mobile` | Record a backup demo video into `demo-backup/` |
 
-## Learn More
+The browser scripts drive the installed Microsoft Edge and need the app running (e.g. `npx next start -p 3100`).
 
-To learn more about Next.js, take a look at the following resources:
+## Project layout
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/lib/engine/   classification, metrics, health, forecast, recommendations, readiness, affordability, insights
+src/app/          Next.js 16 screens (welcome, setup, connect, dashboard, transactions, afford, forecast, …)
+src/data/         demo account + 247 transactions (generated)
+data/             hidden ground truth for tests (never bundled into the app)
+scripts/          dataset generator/validator, reports, smoke, a11y, demo recorder
+brand/            brand guide, NaijaBiz IQ logo, official Wema logos (unmodified)
+pitch/            pitch deck (PowerPoint)
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Docs
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [PHASES.md](PHASES.md): build plan and status
+- [SPEC.md](SPEC.md): every rule and formula behind the numbers
+- [DEMO.md](DEMO.md): demo-day runbook and judge Q&A
+- [brand/BRAND.md](brand/BRAND.md): colours, fonts, logo rules
