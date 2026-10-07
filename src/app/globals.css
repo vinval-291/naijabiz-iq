@@ -1,4 +1,6 @@
-@import "tailwindcss";
+/* Scan only src/ for class names (not public/, data/, demo-backup/ …): a file locked by another
+   program, e.g. the sample CSV open in Excel, would otherwise crash the dev server. */
+@import "tailwindcss" source("../");
 
 /*
  * Self-hosted fonts (public/fonts, SIL Open Font License) so the app never depends on
