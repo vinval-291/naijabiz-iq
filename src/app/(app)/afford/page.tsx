@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useAppState } from "@/components/app-state";
 import { Card, PageHeader, StatusPill, type Status } from "@/components/ui";
+import { WhatsAppAlertButton } from "@/components/whatsapp-alert";
 import { PURPOSES, assessAffordability, type Purpose } from "@/lib/engine/affordability";
 import { formatNaira, formatNairaCompact } from "@/lib/format";
 import type { AffordabilityResult, Verdict } from "@/lib/types";
@@ -149,6 +150,12 @@ function Result({ result: r, onCheck }: { result: AffordabilityResult; onCheck: 
           {r.notes.map((n) => <li key={n} className="flex gap-2"><span aria-hidden="true" className="text-brand">•</span>{n}</li>)}
         </ul>
       )}
+
+      <div className="mt-6 border-t border-line pt-5">
+        {/* Keyed so a new check starts with a fresh button, not the previous send's result. */}
+        <WhatsAppAlertButton key={`${r.amount}-${r.purpose ?? ""}`} kind="afford" amount={r.amount} purpose={r.purpose as Purpose | undefined}
+          label="Send this answer to my WhatsApp" />
+      </div>
     </Card>
   );
 }

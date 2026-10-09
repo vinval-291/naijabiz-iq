@@ -17,6 +17,7 @@ const NAV = [
   { href: "/insights", label: "Insights", icon: BulbIcon, mobile: false },
   { href: "/advice", label: "Recommendations", icon: CheckListIcon, mobile: false },
   { href: "/readiness", label: "Financial readiness", icon: BadgeIcon, mobile: false },
+  { href: "/more", label: "Alerts & account", icon: MoreIcon, mobile: false },
 ] as const;
 
 const MORE_PATHS = ["/more", "/insights", "/advice", "/readiness"];

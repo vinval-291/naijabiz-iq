@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useAppState } from "@/components/app-state";
+import { WhatsAppAlertButton } from "@/components/whatsapp-alert";
+import type { AlertStatus } from "@/lib/alerts";
 import { BadgeIcon, BulbIcon, CheckListIcon } from "@/components/icons";
 import { BuiltForWema } from "@/components/logo";
 import { PageHeader } from "@/components/ui";
@@ -17,6 +20,16 @@ const LINKS = [
 export default function MorePage() {
   const router = useRouter();
   const { connection, reset } = useAppState();
+  const [status, setStatus] = useState<AlertStatus | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/alerts/whatsapp")
+      .then((r) => r.json() as Promise<AlertStatus>)
+      .then((s) => { if (!cancelled) setStatus(s); })
+      .catch(() => { if (!cancelled) setStatus({ configured: false, to: null }); });
+    return () => { cancelled = true; };
+  }, []);
 
   return (
     <>
@@ -35,6 +48,18 @@ export default function MorePage() {
           </li>
         ))}
       </ul>
+
+      <section className="mt-8 rounded-card border border-line p-5">
+        <h2 className="font-display text-lg font-semibold text-ink">WhatsApp alerts</h2>
+        <p className="mt-1 text-sm text-muted">
+          {status === null
+            ? "Checking…"
+            : status.configured
+              ? `Connected: alerts go to ${status.to} on WhatsApp.`
+              : "Not connected on this server. You can still preview every alert."}
+        </p>
+        <div className="mt-4"><WhatsAppAlertButton kind="weekly" label="Send my weekly summary" /></div>
+      </section>
 
       <div className="mt-8 rounded-card bg-surface p-5 text-sm">
         <p className="font-medium text-ink">Connected account</p>

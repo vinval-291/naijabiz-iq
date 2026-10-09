@@ -82,6 +82,18 @@ async function journey(label: string, viewport: { width: number; height: number 
   await page.getByRole("heading", { name: "Yes, you can afford this comfortably." }).waitFor();
   console.log("  ✓ suggested amount is comfortable");
 
+  // WhatsApp alert: only exercised when Twilio isn't configured, so the smoke test never sends real messages.
+  const { configured } = await (await page.request.get(`${BASE}/api/alerts/whatsapp`)).json();
+  if (!configured) {
+    await page.goto(`${BASE}/forecast`);
+    await page.getByRole("button", { name: "Send this alert to my WhatsApp" }).click();
+    await page.getByText("Not sent.").waitFor();
+    await page.getByText("about ₦393K around 12 Oct").first().waitFor();
+    await shot(page, `${label}-10b-whatsapp-preview`);
+  } else {
+    console.log("  • WhatsApp is configured: skipped the send button (no real messages from tests)");
+  }
+
   for (const [path, text, name] of [
     ["/forecast", "Medium cash pressure", "10-forecast"],
     ["/insights", "Business Health Score", "11-insights"],

@@ -3,6 +3,7 @@
 import { useAppState } from "@/components/app-state";
 import { ForecastChart } from "@/components/charts";
 import { Card, CardTitle, PageHeader, StatTile, StatusPill } from "@/components/ui";
+import { WhatsAppAlertButton } from "@/components/whatsapp-alert";
 import { CATEGORY_LABELS } from "@/lib/categories";
 import { formatDayMonth, formatName, formatNaira, formatNairaCompact } from "@/lib/format";
 
@@ -23,6 +24,7 @@ export default function ForecastPage() {
       <Card className="mb-6">
         <StatusPill status={RISK_STATUS[f.risk]} large>{f.risk} cash pressure</StatusPill>
         <p className="mt-3 max-w-3xl text-lg text-ink">{f.reason}</p>
+        <div className="mt-4"><WhatsAppAlertButton kind="forecast" label="Send this alert to my WhatsApp" /></div>
         <dl className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
           <StatTile label="Cash today" value={formatNairaCompact(cash.cashBalance)} />
           <StatTile label={`Lowest, around ${formatDayMonth(f.lowestBalanceDate)}`} value={formatNairaCompact(f.lowestBalance)}

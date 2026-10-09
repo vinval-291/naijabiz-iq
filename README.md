@@ -20,6 +20,7 @@ NaijaBiz IQ reads a business's bank transactions and tells the owner, in plain w
 | Recommendations and plain-language insights | Every number checked against the engine |
 | **Can I afford this?** | ₦300K → "You can, but be careful", safer range ₦180K–₦210K |
 | Financial readiness profile (never a loan decision) | 75 Developing |
+| WhatsApp alerts (Twilio sandbox, optional) | Cash alert, affordability answer, weekly summary |
 
 The engine calculates every number; the insight layer only explains them. Works offline, mobile-first, WCAG 2.1 AA checked.
 
@@ -33,6 +34,10 @@ npm run dev          # http://localhost:3000  (another port: npm run dev -- -p 3
 ```
 
 For the demo, use the faster production build: `npm run build` then `npm start`. See [DEMO.md](DEMO.md) for the click-by-click demo script, reset steps and fallbacks.
+
+### WhatsApp alerts (optional)
+
+The Forecast, "Can I afford this?" and More screens can send the alert to WhatsApp through the free Twilio WhatsApp Sandbox. Copy [.env.example](.env.example) to `.env.local` and fill it in (setup steps in [DEMO.md](DEMO.md)). Without it, the buttons show the exact message instead. The server writes the text from the engine's numbers and only ever sends to the one number configured in `.env.local`, at most once every 20 seconds.
 
 ## Scripts
 
@@ -53,6 +58,7 @@ The browser scripts drive the installed Microsoft Edge and need the app running 
 ```
 src/lib/engine/   classification, metrics, health, forecast, recommendations, readiness, affordability, insights
 src/app/          Next.js 16 screens (welcome, setup, connect, dashboard, transactions, afford, forecast, …)
+src/app/api/      server route for WhatsApp alerts (src/lib/alerts.ts writes them, src/lib/twilio.ts sends them)
 src/data/         demo account + 247 transactions (generated)
 data/             hidden ground truth for tests (never bundled into the app)
 scripts/          dataset generator/validator, reports, smoke, a11y, demo recorder
