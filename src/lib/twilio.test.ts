@@ -76,6 +76,12 @@ describe("sendWhatsApp", () => {
     expect(t.calls).toHaveLength(1);
   });
 
+  it("explains the trial's template-only restriction (21654)", async () => {
+    const t = fakeTwilio({ status: 400, json: { code: 21654, message: "ContentSid Required" } });
+    const r = await sendWhatsApp(config, "x", t.impl, noWait);
+    expect(!r.ok && r.reason).toMatch(/only sends Twilio's ready-made message templates/);
+  });
+
   it("passes through unknown Twilio errors", async () => {
     const t = fakeTwilio({ status: 400, json: { code: 99999, message: "Something odd" } });
     const r = await sendWhatsApp(config, "x", t.impl, noWait);
