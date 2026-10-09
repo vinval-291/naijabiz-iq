@@ -7,6 +7,7 @@ import { useAppState } from "@/components/app-state";
 import {
   BadgeIcon, BulbIcon, CheckListIcon, HomeIcon, ListIcon, MoreIcon, ScaleIcon, TrendIcon,
 } from "@/components/icons";
+import { ModeSwitch } from "@/components/depth";
 import { BuiltForWema, Logo, LogoMark } from "@/components/logo";
 
 const NAV = [
@@ -49,7 +50,8 @@ export default function AppLayout({ children }: { children: ReactNode }) {
       <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col border-r border-line px-4 py-6 lg:flex">
         <Link href="/dashboard" className="px-2" aria-label="NaijaBiz IQ home"><Logo size={28} /></Link>
         <p className="mt-6 truncate px-3 text-xs font-medium uppercase tracking-wider text-muted">{profile?.businessName ?? "Your business"}</p>
-        <nav className="mt-2 flex flex-col gap-0.5" aria-label="Main">
+        <ModeSwitch className="mx-1 mt-3" />
+        <nav className="mt-3 flex flex-col gap-0.5" aria-label="Main">
           {NAV.map(({ href, label, icon: I }) => {
             const active = pathname === href;
             return (
@@ -70,8 +72,8 @@ export default function AppLayout({ children }: { children: ReactNode }) {
       <div className="flex min-w-0 flex-1 flex-col">
         {/* Mobile top bar */}
         <header className="sticky top-0 z-20 flex h-13 items-center justify-between border-b border-line bg-white/95 px-4 backdrop-blur lg:hidden">
-          <Link href="/dashboard" aria-label="NaijaBiz IQ home"><Logo size={26} /></Link>
-          <span className="truncate pl-4 text-sm text-muted">{profile?.businessName}</span>
+          <Link href="/dashboard" aria-label="NaijaBiz IQ home" className="shrink-0"><Logo size={26} /></Link>
+          <ModeSwitch className="ml-3 w-44" />
         </header>
 
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 pb-28 pt-6 sm:px-8 lg:pb-12 lg:pt-10">{children}</main>

@@ -53,6 +53,15 @@ async function scan(page: Page, name: string) {
       await scan(page, name);
     }
 
+    await page.goto(`${BASE}/dashboard`);
+    await page.getByRole("button", { name: "In-depth", exact: true }).click();
+    await page.getByText("Money in vs money out").waitFor();
+    await scan(page, "Dashboard (in-depth)");
+    await page.goto(`${BASE}/forecast`);
+    await page.getByText("Expected balance, day by day").waitFor();
+    await scan(page, "Forecast (in-depth)");
+    await page.getByRole("button", { name: "Simple", exact: true }).click();
+
     await page.goto(`${BASE}/transactions?view=review`);
     await page.getByRole("button", { name: /POS PURCHASE/ }).first().click();
     await scan(page, "Transactions (review question open)");

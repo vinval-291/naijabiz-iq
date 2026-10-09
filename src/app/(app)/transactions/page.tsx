@@ -112,6 +112,7 @@ function Transactions() {
 }
 
 function CategoryChip({ t }: { t: ClassifiedTransaction }) {
+  const { inDepth } = useAppState();
   if (needsReview(t)) return <span className="rounded-full bg-caution/30 px-2.5 py-0.5 text-xs font-semibold text-caution-text">Needs your input</span>;
   const likely = !t.userConfirmed && t.confidence < CONFIDENCE.high;
   return (
@@ -119,7 +120,9 @@ function CategoryChip({ t }: { t: ClassifiedTransaction }) {
       <span className="rounded-full bg-tint px-2.5 py-0.5 text-xs font-semibold text-brand">
         {likely ? "Likely " : ""}{CATEGORY_LABELS[t.category]}
       </span>
-      <span className="text-xs text-muted">{t.userConfirmed ? "Confirmed by you" : `${Math.round(t.confidence * 100)}%`}</span>
+      {t.userConfirmed
+        ? <span className="text-xs text-muted">Confirmed by you</span>
+        : inDepth && <span className="text-xs text-muted">{Math.round(t.confidence * 100)}% sure</span>}
     </span>
   );
 }

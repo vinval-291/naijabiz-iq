@@ -55,7 +55,15 @@ async function journey(label: string, viewport: { width: number; height: number 
 
   await page.getByRole("link", { name: "See my business" }).click();
   await page.getByText("Key insight").waitFor();
+  await page.getByText("Your business at a glance").waitFor(); // simple mode is the default
   await shot(page, `${label}-6-dashboard`);
+
+  // In-depth mode reveals the statistics; switch back so the rest of the journey runs in simple mode.
+  await page.getByRole("button", { name: "In-depth", exact: true }).click();
+  await page.getByText("Money in vs money out").waitFor();
+  await shot(page, `${label}-6b-dashboard-in-depth`);
+  await page.getByRole("button", { name: "Simple", exact: true }).click();
+  await page.getByText("Your business at a glance").waitFor();
 
   // State survives a refresh (localStorage).
   await page.reload();
@@ -107,6 +115,8 @@ async function journey(label: string, viewport: { width: number; height: number 
 
   // Charts drawn at desktop width must shrink when the screen narrows (DevTools, rotating a phone).
   if (viewport.width >= 1024) {
+    await page.goto(`${BASE}/dashboard`);
+    await page.getByRole("button", { name: "In-depth", exact: true }).click(); // the charts live in in-depth mode
     for (const path of ["/dashboard", "/forecast"]) {
       await page.goto(`${BASE}${path}`);
       await page.waitForTimeout(500);

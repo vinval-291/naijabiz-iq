@@ -28,10 +28,12 @@ interface StoredState {
   connection: Connection | null;
   uploaded: RawTransaction[] | null;
   confirmations: Confirmations;
+  /** Simple mode (false, the default) leads with plain sentences; in-depth shows every statistic. */
+  inDepth: boolean;
 }
 
 const STORAGE_KEY = "naijabiz-iq:v1";
-const EMPTY: StoredState = { profile: null, connection: null, uploaded: null, confirmations: NO_CONFIRMATIONS };
+const EMPTY: StoredState = { profile: null, connection: null, uploaded: null, confirmations: NO_CONFIRMATIONS, inDepth: false };
 
 function load(): StoredState {
   try {
@@ -61,6 +63,7 @@ interface AppState extends StoredState {
   connectWema: () => void;
   connectCsv: (fileName: string, transactions: RawTransaction[], openingBalance: number) => void;
   confirm: (transactionId: string, category: Category) => void;
+  setInDepth: (inDepth: boolean) => void;
   reset: () => void;
 }
 
@@ -117,6 +120,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
         const t = transactions.find((x) => x.id === transactionId);
         return t ? { ...s, confirmations: confirmCategory(s.confirmations, t, category) } : s;
       }),
+    setInDepth: (inDepth) => update((s) => ({ ...s, inDepth })),
     reset: () => update(() => EMPTY),
   };
 

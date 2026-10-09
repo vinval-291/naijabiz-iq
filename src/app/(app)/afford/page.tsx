@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useAppState } from "@/components/app-state";
 import { Card, PageHeader, StatusPill, type Status } from "@/components/ui";
 import { WhatsAppAlertButton } from "@/components/whatsapp-alert";
+import { InDepthLink, InDepthOnly, SimpleOnly } from "@/components/depth";
 import { PURPOSES, assessAffordability, type Purpose } from "@/lib/engine/affordability";
 import { formatNaira, formatNairaCompact } from "@/lib/format";
 import type { AffordabilityResult, Verdict } from "@/lib/types";
@@ -113,6 +114,17 @@ function Result({ result: r, onCheck }: { result: AffordabilityResult; onCheck: 
       <StatusPill status={status} large>{VERDICT_LABEL[r.verdict]}</StatusPill>
       <h2 className="mt-3 font-display text-2xl font-semibold text-ink sm:text-3xl">{r.message}</h2>
 
+      <SimpleOnly>
+        <p className="mt-3 text-lg leading-snug text-ink">
+          {r.remainingBuffer >= 0
+            ? <>After this purchase and the bills expected over the next two weeks, you&apos;d have about <strong className="font-semibold">{formatNairaCompact(r.remainingBuffer)}</strong> left.</>
+            : <>This could leave you about <strong className="font-semibold">{formatNairaCompact(-r.remainingBuffer)}</strong> short of the bills expected over the next two weeks.</>}
+          {" "}
+          <span className="text-muted">We suggest keeping at least {formatNairaCompact(r.minimumReserve)} for running costs.</span>
+        </p>
+      </SimpleOnly>
+
+      <InDepthOnly>
       <dl className="mt-5 divide-y divide-line text-[15px]">
         {rows.map(([label, value, sign]) => (
           <div key={label} className="flex justify-between gap-4 py-2.5">
@@ -134,6 +146,7 @@ function Result({ result: r, onCheck }: { result: AffordabilityResult; onCheck: 
         </div>
         <p className="mt-2 text-xs text-muted">The black mark is your {formatNairaCompact(r.minimumReserve)} safety reserve.</p>
       </div>
+      </InDepthOnly>
 
       {r.recommendedRange && r.verdict !== "Comfortable" && (
         <div className="mt-5 rounded-input bg-tint p-4">
@@ -145,11 +158,14 @@ function Result({ result: r, onCheck }: { result: AffordabilityResult; onCheck: 
         </div>
       )}
 
-      {r.notes.length > 0 && (
-        <ul className="mt-5 space-y-2 text-sm text-muted">
-          {r.notes.map((n) => <li key={n} className="flex gap-2"><span aria-hidden="true" className="text-brand">•</span>{n}</li>)}
-        </ul>
-      )}
+      <InDepthOnly>
+        {r.notes.length > 0 && (
+          <ul className="mt-5 space-y-2 text-sm text-muted">
+            {r.notes.map((n) => <li key={n} className="flex gap-2"><span aria-hidden="true" className="text-brand">•</span>{n}</li>)}
+          </ul>
+        )}
+      </InDepthOnly>
+      <div className="mt-4"><InDepthLink>See the full calculation</InDepthLink></div>
 
       <div className="mt-6 border-t border-line pt-5">
         {/* Keyed so a new check starts with a fresh button, not the previous send's result. */}

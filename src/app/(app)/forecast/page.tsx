@@ -4,13 +4,14 @@ import { useAppState } from "@/components/app-state";
 import { ForecastChart } from "@/components/charts";
 import { Card, CardTitle, PageHeader, StatTile, StatusPill } from "@/components/ui";
 import { WhatsAppAlertButton } from "@/components/whatsapp-alert";
+import { InDepthLink, InDepthOnly, SimpleOnly } from "@/components/depth";
 import { CATEGORY_LABELS } from "@/lib/categories";
 import { formatDayMonth, formatName, formatNaira, formatNairaCompact } from "@/lib/format";
 
 const RISK_STATUS = { Low: "good", Medium: "warning", High: "critical" } as const;
 
 export default function ForecastPage() {
-  const { analysis } = useAppState();
+  const { analysis, inDepth } = useAppState();
   if (!analysis) return null;
   const { forecast: f, cash } = analysis;
 
@@ -23,8 +24,20 @@ export default function ForecastPage() {
 
       <Card className="mb-6">
         <StatusPill status={RISK_STATUS[f.risk]} large>{f.risk} cash pressure</StatusPill>
+        <SimpleOnly>
+          <p className="mt-3 max-w-3xl text-xl font-semibold leading-snug text-ink">
+            Your cash is likely to be lowest around {formatDayMonth(f.lowestBalanceDate)}, at about {formatNairaCompact(f.lowestBalance)}.
+          </p>
+          <p className="mt-1 max-w-3xl text-muted">
+            {f.lowestBalance >= cash.minimumReserve
+              ? `That's still above the ${formatNairaCompact(cash.minimumReserve)} we suggest keeping for running costs.`
+              : `That's below the ${formatNairaCompact(cash.minimumReserve)} we suggest keeping for running costs.`}
+          </p>
+        </SimpleOnly>
         <p className="mt-3 max-w-3xl text-lg text-ink">{f.reason}</p>
         <div className="mt-4"><WhatsAppAlertButton kind="forecast" label="Send this alert to my WhatsApp" /></div>
+        <div className="mt-5"><InDepthLink /></div>
+        <InDepthOnly>
         <dl className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
           <StatTile label="Cash today" value={formatNairaCompact(cash.cashBalance)} />
           <StatTile label={`Lowest, around ${formatDayMonth(f.lowestBalanceDate)}`} value={formatNairaCompact(f.lowestBalance)}
@@ -32,16 +45,19 @@ export default function ForecastPage() {
           <StatTile label="Expected money in" value={formatNairaCompact(f.expectedInflow)} />
           <StatTile label="Expected money out" value={formatNairaCompact(f.expectedOutflow)} />
         </dl>
+        </InDepthOnly>
       </Card>
 
-      <div className="grid gap-6 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
-          <CardTitle>Expected balance, day by day</CardTitle>
-          <ForecastChart forecast={f} startBalance={cash.cashBalance} minimumReserve={cash.minimumReserve} />
-        </Card>
+      <div className={`grid gap-6 ${inDepth ? "lg:grid-cols-3" : ""}`}>
+        <InDepthOnly>
+          <Card className="lg:col-span-2">
+            <CardTitle>Expected balance, day by day</CardTitle>
+            <ForecastChart forecast={f} startBalance={cash.cashBalance} minimumReserve={cash.minimumReserve} />
+          </Card>
+        </InDepthOnly>
 
         <Card>
-          <CardTitle>Regular payments due</CardTitle>
+          <CardTitle>{inDepth ? "Regular payments due" : "Payments coming up"}</CardTitle>
           {f.scheduled.length === 0 ? <p className="text-muted">No regular payments expected in the next two weeks.</p> : (
             <ul className="divide-y divide-line">
               {f.scheduled.map((p) => (

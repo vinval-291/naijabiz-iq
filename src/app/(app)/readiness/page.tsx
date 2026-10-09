@@ -1,6 +1,7 @@
 "use client";
 
 import { useAppState } from "@/components/app-state";
+import { InDepthLink, InDepthOnly, SimpleOnly } from "@/components/depth";
 import { Card, CardTitle, Meter, PageHeader, StatusPill } from "@/components/ui";
 
 const BAND_STATUS = { Strong: "good", Developing: "good", Emerging: "warning", "Early stage": "critical" } as const;
@@ -59,6 +60,18 @@ export default function ReadinessPage() {
           </div>
         </div>
 
+        <SimpleOnly>
+          <Card className="self-start">
+            <CardTitle>How we worked this out</CardTitle>
+            <p className="text-[15px] text-ink">
+              We looked at {r.indicators.length} habits in your records, like how steady your sales are, whether more money
+              comes in than goes out, and how big your cash cushion is.
+            </p>
+            <div className="mt-4"><InDepthLink>See each habit and its score</InDepthLink></div>
+          </Card>
+        </SimpleOnly>
+
+        <InDepthOnly>
         <Card className="self-start">
           <CardTitle>What we looked at</CardTitle>
           <ul className="space-y-4">
@@ -74,6 +87,7 @@ export default function ReadinessPage() {
             ))}
           </ul>
         </Card>
+        </InDepthOnly>
       </div>
     </>
   );

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useAppState } from "@/components/app-state";
 import { MoneyInOutChart } from "@/components/charts";
+import { InDepthLink, InDepthOnly, SimpleOnly } from "@/components/depth";
 import { InsightCard } from "@/components/insight-card";
 import { Card, CardTitle, Meter, PageHeader, StatTile, StatusPill, TextLink, scoreStatus } from "@/components/ui";
 import { growth } from "@/lib/engine/metrics";
@@ -23,6 +24,7 @@ export default function DashboardPage() {
     const g = previous === undefined ? null : growth(current, previous);
     return g === null ? undefined : { text: `${formatPercent(g)} vs ${prevName}`, good: Math.round(g) === 0 ? null : (g > 0) === upIsGood };
   };
+  const cashChange = prev ? growth(cash.cashBalance, prev.closingBalance) : null;
   const topRec = recommendations[0];
   const weakest = [...health.components].sort((a, b) => a.score - b.score).slice(0, 2);
 
@@ -41,6 +43,37 @@ export default function DashboardPage() {
         </div>
       )}
 
+      <SimpleOnly>
+        <Card>
+          <CardTitle>Your business at a glance</CardTitle>
+          <ul className="space-y-4 text-lg leading-snug text-ink">
+            <li>
+              In {monthName} you earned <strong className="font-semibold">{formatNairaCompact(month.revenue)}</strong> from sales and spent{" "}
+              <strong className="font-semibold">{formatNairaCompact(month.expenses)}</strong>.{" "}
+              <span className={month.netCashFlow < 0 ? "text-danger-text" : "text-positive-text"}>
+                {month.netCashFlow < 0
+                  ? `That's ${formatNairaCompact(-month.netCashFlow)} more than you earned.`
+                  : `You kept ${formatNairaCompact(month.netCashFlow)}.`}
+              </span>
+            </li>
+            <li>
+              You have <strong className="font-semibold">{formatNairaCompact(cash.cashBalance)}</strong> in the bank
+              {cashChange !== null && Math.round(cashChange) !== 0
+                ? `, ${Math.abs(Math.round(cashChange))}% ${cashChange < 0 ? "less" : "more"} than at the end of ${prevName}.`
+                : "."}
+            </li>
+            <li>
+              Your Business Health is <strong className="font-semibold">{health.score}</strong> ({health.band})
+              {previousHealth && Math.abs(previousHealth.score - health.score) >= 5
+                ? `, ${previousHealth.score > health.score ? "down" : "up"} from ${previousHealth.score} in ${formatMonthName(previousHealth.asOf)}.`
+                : "."}
+            </li>
+          </ul>
+          <div className="mt-5"><InDepthLink /></div>
+        </Card>
+      </SimpleOnly>
+
+      <InDepthOnly>
       <dl className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         <StatTile label={`Sales in ${monthName}`} value={formatNairaCompact(month.revenue)} delta={vs(month.revenue, prev?.revenue, true)} />
         <StatTile label={`Spending in ${monthName}`} value={formatNairaCompact(month.expenses)} delta={vs(month.expenses, prev?.expenses, false)} />
@@ -83,6 +116,7 @@ export default function DashboardPage() {
           <p className="mt-4 text-xs text-muted">This is not a credit score or a loan decision.</p>
         </Card>
       </div>
+      </InDepthOnly>
 
       <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <Card>
