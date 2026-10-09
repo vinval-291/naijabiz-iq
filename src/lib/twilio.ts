@@ -39,7 +39,7 @@ export function maskNumber(to: string): string {
 const FRIENDLY: Record<number, string> = {
   20003: "Twilio rejected the account details. Check TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN in .env.local.",
   21211: "The phone number in ALERT_WHATSAPP_TO isn't valid. Use the format whatsapp:+234XXXXXXXXXX.",
-  21654: "This Twilio trial only sends Twilio's ready-made message templates, not custom text. Use the classic WhatsApp Sandbox (+1 415 523 8886) or upgrade the Twilio account to send these alerts.",
+  21654: "Not sent live: this Twilio trial only allows Twilio's ready-made message templates. Upgrading the Twilio account switches live sending on.",
   63007: "Twilio couldn't find that WhatsApp sender. TWILIO_WHATSAPP_FROM should be whatsapp:+14155238886 (the sandbox number).",
   63015: "This phone hasn't joined the WhatsApp Sandbox, or its 3-day opt-in has expired. Send your join code to +1 415 523 8886 on WhatsApp, then try again.",
   63016: "WhatsApp only allows this message within 24 hours of the phone messaging the sandbox. Send \"hi\" to +1 415 523 8886 from the demo phone, then try again.",

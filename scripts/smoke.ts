@@ -87,7 +87,7 @@ async function journey(label: string, viewport: { width: number; height: number 
   if (!configured) {
     await page.goto(`${BASE}/forecast`);
     await page.getByRole("button", { name: "Send this alert to my WhatsApp" }).click();
-    await page.getByText("Not sent.").waitFor();
+    await page.getByText("WhatsApp preview").waitFor();
     await page.getByText("about ₦393K around 12 Oct").first().waitFor();
     await shot(page, `${label}-10b-whatsapp-preview`);
   } else {

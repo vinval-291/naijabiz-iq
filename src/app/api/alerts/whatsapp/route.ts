@@ -34,7 +34,7 @@ export async function POST(request: Request) {
   if (!config) {
     return Response.json({
       sent: false, reason: "not-configured", message,
-      detail: "WhatsApp alerts aren't connected on this server, so nothing was sent. This is the message Aisha would receive.",
+      detail: "Live sending is off on this server, so nothing was sent.",
     } satisfies AlertResponse);
   }
 

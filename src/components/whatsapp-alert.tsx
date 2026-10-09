@@ -58,9 +58,14 @@ export function WhatsAppAlertButton({ kind, amount, purpose, label = "Send to my
             {result.sent ? (
               <p className="text-sm font-medium text-positive-text">✓ Sent to WhatsApp {result.to}</p>
             ) : (
-              <p className="text-sm text-caution-text"><strong className="font-semibold">Not sent.</strong> {result.detail}</p>
+              // A preview, not an error: the message is the point; why it wasn't sent is secondary.
+              <div>
+                <p className="text-sm font-semibold text-ink">WhatsApp preview</p>
+                <p className="text-sm text-muted">This is the alert Aisha receives on WhatsApp.</p>
+              </div>
             )}
             <WhatsAppBubble text={result.message} />
+            {!result.sent && <p className="max-w-md text-xs text-muted">{result.detail}</p>}
           </div>
         )}
       </div>

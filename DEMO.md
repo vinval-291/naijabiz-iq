@@ -24,7 +24,9 @@ Without this set-up the app still works: the WhatsApp buttons show the exact mes
 2. **From the demo phone**, send `join <your code>` to **+1 415 523 8886** on WhatsApp. The opt-in lasts **3 days**, so redo it if the demo is later.
 3. **On the demo laptop:** copy `.env.example` to `.env.local` and fill in the Account SID, Auth Token and the demo phone's number (`whatsapp:+234…`). Never commit or share `.env.local`. Restart the app.
 4. **Check:** the app's **More** screen (desktop: **Alerts & account**) should say *Connected: alerts go to •••• 1234*.
-5. **Within 24 hours of presenting**, send `hi` to the sandbox number from the demo phone, then press **Send my weekly summary** once as a test. If it says *Not sent*, the reason tells you what to fix (not joined, 24-hour window, wrong keys).
+5. **Within 24 hours of presenting**, send `hi` to the sandbox number from the demo phone, then press **Send my weekly summary** once as a test. If it shows *WhatsApp preview* instead of ✓ *Sent*, the small grey note under the message tells you what to fix (not joined, 24-hour window, wrong keys).
+
+**Current status (9 Oct):** this Twilio account is on the newer trial, which only allows Twilio's ready-made templates (error 21654), so live sending needs an upgraded account. For the demo, rename `.env.local` to `.env.local.off` and restart: the buttons then show the preview straight away. Rename it back after upgrading.
 
 The free trial includes 100 WhatsApp messages. The app sends at most one every 20 seconds and only ever to the number in `.env.local`.
 
@@ -38,7 +40,7 @@ The free trial includes 100 WhatsApp messages. The app sends at most one every 2
 | 4 | **See my business** | "Aisha's revenue is growing… but something is wrong." Key insight: **sales +12%, stock +31%.** Spending ₦2.92M > sales ₦2.76M in September. Health **66**, down from **84** in June. |
 | 5 | **Transactions** (or the yellow "7 transactions need your input" link) → tap a **POS PURCHASE** → **Generator fuel** | "NaijaBiz IQ learns": **"We also recognized 4 similar transactions."** 7 → 2. |
 | 6 | **Forecast** | **Medium cash pressure.** Lowest about **₦393K around 12 Oct**, when supplier payments fall due. |
-| 6b | **Send this alert to my WhatsApp** (optional) | "NaijaBiz IQ doesn't wait for Aisha to open the app." Hold up the phone as the alert arrives. If it says *Not sent*, point at the preview: "this is the message she gets." |
+| 6b | **Send this alert to my WhatsApp** (optional) | "NaijaBiz IQ doesn't wait for Aisha to open the app." With live sending: hold up the phone as the alert arrives. With the preview: "This is the alert Aisha receives on WhatsApp. It's wired to Twilio; the free trial only allows template messages, so live sending switches on with a paid account." |
 | 7 | **Can I afford this?** → type **300000** → **Check** | The killer moment: **"You can, but be careful."** ₦580K − ₦300K − ₦187K expected expenses = **₦93K left**, below the ₦180K reserve. Safer: **₦180K–₦210K**. Tap **Check ₦210K instead** → **"Yes, you can afford this comfortably."** |
 | 8 | **Recommendations** | What to do next, each backed by a number ("Why am I seeing this?"). |
 | 9 | Close | "Wema already has the transactions. NaijaBiz IQ turns those transactions into intelligence." |
