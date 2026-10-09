@@ -18,3 +18,8 @@ export const BulbIcon = () => <Icon><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 
 export const CheckListIcon = () => <Icon><path d="M4 7l2 2 3-3M4 15l2 2 3-3M12 8h8M12 16h8" /></Icon>;
 export const BadgeIcon = () => <Icon><circle cx="12" cy="9" r="5" /><path d="M9 13.5L8 21l4-2 4 2-1-7.5" /></Icon>;
 export const MoreIcon = () => <Icon><circle cx="5" cy="12" r="1.2" /><circle cx="12" cy="12" r="1.2" /><circle cx="19" cy="12" r="1.2" /></Icon>;
+export const ChatIcon = () => <Icon><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></Icon>;
+export const SparklesIcon = () => <Icon><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z" /><path d="M19 16l.9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9z" /></Icon>;
+export const XIcon = () => <Icon><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></Icon>;
+export const SendIcon = () => <Icon><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></Icon>;
+

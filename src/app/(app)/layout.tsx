@@ -8,6 +8,8 @@ import {
   BadgeIcon, BulbIcon, CheckListIcon, HomeIcon, ListIcon, MoreIcon, ScaleIcon, TrendIcon,
 } from "@/components/icons";
 import { BuiltForWema, Logo, LogoMark } from "@/components/logo";
+import { Chatbot } from "@/components/chatbot";
+
 
 const NAV = [
   { href: "/dashboard", label: "Home", icon: HomeIcon, mobile: true },
@@ -94,6 +96,8 @@ export default function AppLayout({ children }: { children: ReactNode }) {
           })}
         </nav>
       </div>
+      <Chatbot />
     </div>
   );
 }
+
